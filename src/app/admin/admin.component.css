@@ -1,0 +1,13 @@
+
+th {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+td {
+  font-size: 1.4em;
+}
+
+td button {
+  margin-right: 10px;
+}

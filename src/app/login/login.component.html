@@ -1,0 +1,30 @@
+<div class="title-bar"> <h1 class="page-title">Catalog Administration</h1></div>
+<div class="page-container">
+
+<form class="form-horizontal" novalidate [formGroup]="login" (ngSubmit)="onSubmit(login)" >
+<fieldset>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="user">Username:</label>
+  <div class="col-md-4">
+  <input id="userName" formControlName="userName" type="text" placeholder="" class="form-control input-md" required >
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="password">Password:</label>
+  <div class="col-md-4">
+    <input id="password" formControlName="password" type="password" placeholder="" class="form-control input-md" required >
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="login"></label>
+  <div class="col-md-4">
+    <button [disabled]="user.invalid" id="login" name="login" class="btn btn-default" type="submit"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>

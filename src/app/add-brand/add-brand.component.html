@@ -1,0 +1,33 @@
+<div class="title-bar"> <h1 class="page-title">Add Brand</h1></div>
+<div class="page-container">
+
+  <form class="form-horizontal">
+  <fieldset>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="brandname">Brand Name:</label>
+    <div class="col-md-4">
+    <input id="brandname" name="brandname" type="text" placeholder="" class="form-control input-md">
+
+    </div>
+  </div>
+
+  <!-- File Button -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="uploadbanner">Upload Banner (.jpg or .png, 1900px by 800px):</label>
+    <label class="custom-file-upload" for="uploadbanner">Select File</label>
+    <div class="upload-filename">{{bannerFile}}</div>
+    <div class="col-md-4">
+      <input id="uploadbanner" name="uploadbanner" class="input-file" type="file" accept=".jpg, .jpeg, .png" (change)="onBannerChange($event)">
+    </div>
+  </div>
+
+
+  <button type="submit" class="btn btn-lg btn-primary center-block"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+ Add Brand</button>
+  </fieldset>
+  </form>
+
+
+</div>

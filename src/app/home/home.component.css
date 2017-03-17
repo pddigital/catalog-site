@@ -1,0 +1,15 @@
+.slide-img {
+  width: 100%;
+}
+
+
+.carousel-caption {
+  top: 30%;
+}
+
+.carousel-caption h3 {
+  font-size: 4em;
+  font-weight: 900;
+  text-transform: uppercase;
+
+}
