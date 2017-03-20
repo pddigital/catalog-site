@@ -14,7 +14,11 @@ export class LoginComponent implements OnInit {
   login: FormGroup;
 
   onSubmit({value, valid}: {value: Login, valid: boolean}){
-    console.log(value, valid);
+    this.BrandService.login(login.value)
+                     .subscribe(
+                       login  => this.user.push(user),
+                       error =>  this.errorMessage = <any>error);
+    console.log(user);
   }
 
 
