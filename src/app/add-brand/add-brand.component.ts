@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { BrandService } from '../brand.service';
+import { EmitterService } from '../emitter.service';
+import { Brand } from '../brand';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-brand',
@@ -16,6 +20,14 @@ export class AddBrandComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.brand = new FormGroup({
+      name: new FormControl('', Validators.required),
+      displayImg: new FormControl('', Validators.required),
+      link: new FormControl('', Validators.required)
+    })
   }
+
+
 
 }

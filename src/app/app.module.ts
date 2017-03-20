@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { BrandComponent } from './brand/brand.component';
-import { BrandService } from './brand.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
@@ -20,6 +19,9 @@ import { EditCatalogComponent } from './edit-catalog/edit-catalog.component';
 import { EditBrandComponent } from './edit-brand/edit-brand.component';
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+
+import { BrandService } from './brand.service';
+import { EmitterService } from './emitter.service';
 
 const ROUTES = [
   {
@@ -90,7 +92,7 @@ const ROUTES = [
     ModalModule.forRoot(),
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [BrandService],
+  providers: [BrandService, EmitterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

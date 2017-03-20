@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BrandService } from '../brand.service';
+import { EmitterService } from '../emitter.service';
+import { Brand } from '../brand';
+
 
 @Component({
   selector: 'app-brand',
@@ -13,6 +17,8 @@ export class BrandComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+
     console.log(this.route.snapshot.params['name']);
   }
 }

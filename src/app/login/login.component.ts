@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../brand.service';
+import { EmitterService } from '../emitter.service';
 import { Login } from '../login';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -14,11 +15,7 @@ export class LoginComponent implements OnInit {
   login: FormGroup;
 
   onSubmit({value, valid}: {value: Login, valid: boolean}){
-    this.BrandService.login(login.value)
-                     .subscribe(
-                       login  => this.user.push(user),
-                       error =>  this.errorMessage = <any>error);
-    console.log(user);
+
   }
 
 
