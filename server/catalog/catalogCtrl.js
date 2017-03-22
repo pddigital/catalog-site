@@ -21,6 +21,7 @@ getCatalogs(req, res) {
   });
 },
   createCatalog(req, res) {
+
     new Catalog(req.body).save((err, catalog) => {
       if (err) {
         return res.status(500).json(err);

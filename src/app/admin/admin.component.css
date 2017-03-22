@@ -11,3 +11,9 @@ td {
 td button {
   margin-right: 10px;
 }
+
+.admin-buttons {
+  text-align: center;
+  width: 100%;
+  padding: 4%;
+}

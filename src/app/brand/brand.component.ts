@@ -10,6 +10,7 @@ import { Brand } from '../brand';
   templateUrl: './brand.component.html',
   styleUrls: ['./brand.component.css']
 })
+
 export class BrandComponent implements OnInit {
 
   brandName =  this.route.snapshot.params['name'];

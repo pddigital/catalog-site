@@ -1,7 +1,7 @@
 <div class="title-bar"> <h1 class="page-title">Add Catalog</h1></div>
 <div class="page-container">
 
-  <form class="form-horizontal">
+  <form class="form-horizontal" novalidate [formGroup]="brand" (ngSubmit)="onSubmit(catalog)">
   <fieldset>
 
   <div class="form-group">
@@ -17,16 +17,21 @@
   </div>
 
   <div class="form-group">
-    <label class="col-md-4 control-label" for="catalogtitle">Catalog Title:</label>
+    <label class="col-md-4 control-label" for="catalogName">Catalog Title:</label>
     <div class="col-md-4">
-    <input id="catalogtitle" name="catalogtitle" type="text" placeholder="" class="form-control input-md">
-
+    <input id="catalogName" name="catalogName" formControlName="catalogName" type="text" placeholder="" class="form-control input-md">
+    <br />
+     <div
+    class="alert alert-danger"
+    *ngIf="brand.get('name').hasError('required') && brand.get('name').touched">
+    <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Brand name is required!</p>
+    </div>
     </div>
   </div>
 
 
   <div class="form-group">
-    <label class="col-md-4 control-label" for="releasedate">Release Date:</label>
+    <label class="col-md-4 control-label" for="pubDate">Release Date:</label>
     <div class="col-md-4">
       <my-date-picker [options]="myDatePickerOptions"
                 (dateChanged)="onDateChanged($event)"></my-date-picker>

@@ -16,8 +16,8 @@ const mongoStoreFactory = require('connect-mongo');
 const helmet = require('helmet');
 
 let corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:4042'],
-  default: 'http://localhost:4042'
+  origin: ['http://localhost:3000', 'http://localhost:4200'],
+  default: 'http://localhost:4200'
 }
 
 const mongoUri = `mongodb://${keys.mongoUser}:${keys.mongoPass}@ds121980.mlab.com:21980/tagcatalog`;
@@ -31,6 +31,8 @@ mongoose.connection.once('open', () => {
 const app = express();
 
 app.use(express.static(`${__dirname}/dist`));
+app.use(express.static(`${__dirname}/uploads`));
+
 app.use(bodyParser());
 
 const MongoStore = mongoStoreFactory(sessions);
@@ -74,9 +76,14 @@ app.use(helmet.contentSecurityPolicy({
 
 masterRoutes(app);
 
+app.get('/uploads/:file', (request, response)=> {
+  response.sendFile(path.resolve(__dirname, 'uploads', request.params.file));
+})
+
 app.get('*', (request, response)=> {
   response.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
 })
+
 
 passport.use(new LocalStrategy(
   (username, password, done)=> {
