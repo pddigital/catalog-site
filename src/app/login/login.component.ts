@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../brand.service';
 import { EmitterService } from '../emitter.service';
 import { Login } from '../login';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,20 +12,28 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  constructor(private fb: FormBuilder, private brandService: BrandService) { }
+
   login: FormGroup;
+  loginState: Login;
+  errorMessage: string;
 
   onSubmit({value, valid}: {value: Login, valid: boolean}){
+      console.log(value)
+      this.brandService.authenticate(value) 
+                       .subscribe(
+                       loginState  => this.loginState = loginState,
+                       error =>  this.errorMessage = <any>error).then((stuff)=>{
+                         console.log(stuff);
+                       })
 
   }
 
-
-  constructor(private brandService: BrandService) { }
-
   ngOnInit() {
 
-    this.login = new FormGroup({
-      userName: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+      this.login = this.fb.group ({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     })
 
   }

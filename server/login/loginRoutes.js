@@ -3,10 +3,7 @@ const loginCtrl = require('./loginCtrl');
 
 module.exports = app => {
 
-app.post('/api/login', loginCtrl.timedOut,
-    passport.authenticate('local', { successRedirect: '/admin/',
-                                     failureRedirect: '/login/?failure=true'})
-);
+app.post('/api/login', loginCtrl.timedOut, loginCtrl.authenticate);
 
 app.get('/api/logout', (req, res)=> {
   req.logout();

@@ -25,12 +25,11 @@ export class AddBrandComponent implements OnInit {
     if(this.bannerFileSrc && value.name && value.link){
       this.uploadError = false;
       value.displayImg = this.bannerFileSrc;
-      
-      console.log(value);
       this.brandService.addBrand(value) 
                        .subscribe(
                        newBrand  => this.newBrand = newBrand,
                        error =>  this.errorMessage = <any>error);
+      
 
     }
     else {

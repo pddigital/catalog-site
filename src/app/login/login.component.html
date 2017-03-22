@@ -7,11 +7,11 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="user">Username:</label>
   <div class="col-md-4">
-  <input id="userName" formControlName="userName" type="text" placeholder="" class="form-control input-md" required >
+  <input id="userName" formControlName="username" type="text" placeholder="" class="form-control input-md" required >
   <br />
   <div
     class="alert alert-danger"
-    *ngIf="login.get('userName').hasError('required') && login.get('userName').touched">
+    *ngIf="login.get('username').hasError('required') && login.get('username').touched">
     <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Username is required!</p>
   </div>
   </div>

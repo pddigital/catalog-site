@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const Catalog = mongoose.Schema({
+  brand: {
+    type: String,
+    required: true
+  },
   catalogName: {
     type: String,
     required: true
@@ -13,7 +17,7 @@ const Catalog = mongoose.Schema({
     type: String,
     required: true
   },
-  catalogLink: {
+  catalogPdf: {
     type: String,
     required: true
   }

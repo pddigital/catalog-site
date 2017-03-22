@@ -1,5 +1,6 @@
 const User = require('./User');
 const password = require('password-hash-and-salt');
+const passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 
 module.exports = {
   loggedIn(req, res, next) {
@@ -9,6 +10,18 @@ module.exports = {
     else {
       return res.json(false);
     }d
+  },
+  authenticate(req, res, next) {
+      passport.authenticate('local', function(err, user, info) {
+        if (err) { return res.json(false); }
+
+        if (!user) { return res.json(false); }
+       
+        req.logIn(user, function(err) {
+          if (err) { return next(err); }
+          return res.json(true)
+        });
+  })(req, res, next);
   },
   isAuthed(req, res, next){
     if (req.isAuthenticated()) {

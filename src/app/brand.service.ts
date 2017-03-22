@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Login } from './login';
 import { Brand } from './brand';
-
+import { Catalog } from './catalog';
 
 @Injectable()
 export class BrandService {
@@ -12,15 +12,38 @@ export class BrandService {
 
   private loginUrl = 'http://localhost:3000/api/login';
   private brandUrl = 'http://localhost:3000/api/brand';
+  private catalogUrl = 'http://localhost:3000/api/catalog';
 
+
+  authenticate(body: Object): Observable<Login>{
+      let bodyString = JSON.stringify(body); // Stringify payload
+      let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+      let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+      console.log(body)
+      return this.http.post(this.loginUrl, body, options) // ...using post request
+                      .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+                      .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+
+  }
 
   addBrand(body: Object): Observable<Brand>{
     let bodyString = JSON.stringify(body); // Stringify payload
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-    console.log(body);
     return this.http.post(this.brandUrl, body, options) // ...using post request
+                     .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+                     .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+
+  }
+
+  addCatalog(body: Object): Observable<Catalog>{
+    let bodyString = JSON.stringify(body); // Stringify payload
+    let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+    let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+    return this.http.post(this.catalogUrl, body, options) // ...using post request
                      .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
                      .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
 
