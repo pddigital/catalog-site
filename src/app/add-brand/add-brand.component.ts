@@ -22,6 +22,9 @@ export class AddBrandComponent implements OnInit {
   errorMessage: string;
 
   onSubmit({value, valid}: {value: Brand, valid: boolean}){
+    if(!this.bannerFileSrc) {
+      this.uploadError = true;
+    }
     if(this.bannerFileSrc && value.name && value.link){
       this.uploadError = false;
       value.displayImg = this.bannerFileSrc;
@@ -31,9 +34,6 @@ export class AddBrandComponent implements OnInit {
                        error =>  this.errorMessage = <any>error);
       
 
-    }
-    else {
-      this.uploadError = true;
     }
    
   }

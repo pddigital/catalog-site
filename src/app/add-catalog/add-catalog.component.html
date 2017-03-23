@@ -13,6 +13,11 @@
         <option value="Savile Row">Savile Row</option>
         <option value="Damon">Damon</option>
       </select>
+     <div
+    class="alert alert-danger"
+    *ngIf="this.brandError">
+    <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Brand name is required!</p>
+    </div>
     </div>
   </div>
 
@@ -20,7 +25,11 @@
     <label class="col-md-4 control-label" for="catalogName">Catalog Name:</label>
     <div class="col-md-4">
     <input id="catalogName" name="catalogName" formControlName="catalogName" type="text" placeholder="" class="form-control input-md">
-    <br />
+       <div
+       class="alert alert-danger"
+      *ngIf="this.nameError">
+      <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Catalog name is required!</p>
+      </div>
     </div>
   </div>
 
@@ -30,6 +39,11 @@
     <div class="col-md-4">
       <my-date-picker formControlName="pubDate" [options]="myDatePickerOptions"
                 (dateChanged)="onDateChanged($event)"></my-date-picker>
+     <div
+        class="alert alert-danger"
+        *ngIf="this.dateError">
+        <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> A valid date is required!</p>
+      </div>
     </div>
   </div>
 
@@ -39,6 +53,12 @@
     <div class="upload-filename">{{thumbFile}}</div>
     <div class="col-md-4">
       <input id="uploadthumb" formControlName="catalogThumb" name="uploadthumb" class="input-file" type="file" accept=".jpg, .jpeg, .png" (change)="onThumbChange($event)">
+  
+      <div
+        class="alert alert-danger"
+        *ngIf="this.imageError">
+        <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> A valid image file is required!</p>
+      </div>
     </div>
   </div>
 
@@ -48,6 +68,11 @@
     <div class="upload-filename">{{pdfFile}}</div>
     <div class="col-md-4">
       <input id="uploadpdf" formControlName="catalogPdf" name="uploadpdf" class="input-file" type="file" accept=".pdf" (change)="onPdfChange($event)">
+      <div
+        class="alert alert-danger"
+        *ngIf="this.pdfError">
+        <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> A valid PDF file is required!</p>
+      </div>
     </div>
   </div>
 

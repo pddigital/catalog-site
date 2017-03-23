@@ -9,7 +9,6 @@
     <label class="col-md-4 control-label" for="name">Brand Name:</label>
     <div class="col-md-4">
     <input id="name" formControlName="name" type="text" placeholder="" class="form-control input-md" required>
-    <br />
      <div
     class="alert alert-danger"
     *ngIf="brand.get('name').hasError('required') && brand.get('name').touched">
@@ -23,8 +22,7 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="displayImg">Upload Banner (.jpg or .png, 1900px by 800px):</label>
     <label class="custom-file-upload" for="displayImg">Select File</label>
-    
-    <div class="upload-filename">{{bannerFile}}</div>
+  
     <div class="col-md-4">
         <img class="uploadedImg" *ngIf="this.bannerFileSrc" [src]="this.bannerFileSrc">
        <div
@@ -42,7 +40,6 @@
     <label class="col-md-4 control-label" for="link">Brand Link:</label>
     <div class="col-md-4">
     <input id="link" formControlName="link" type="text" placeholder="" class="form-control input-md" required>
-    <br />
      <div
     class="alert alert-danger"
     *ngIf="brand.get('link').hasError('required') && brand.get('link').touched">

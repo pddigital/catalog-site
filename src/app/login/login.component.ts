@@ -23,9 +23,7 @@ export class LoginComponent implements OnInit {
       this.brandService.authenticate(value) 
                        .subscribe(
                        loginState  => this.loginState = loginState,
-                       error =>  this.errorMessage = <any>error).then((stuff)=>{
-                         console.log(stuff);
-                       })
+                       error =>  this.errorMessage = <any>error);
 
   }
 

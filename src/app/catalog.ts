@@ -1,7 +1,7 @@
 export interface Catalog {
+  brand: string;
   catalogName: string;
   pubDate: any;
   catalogThumb: string;
-  catalogLink: string;
-
+  catalogPdf: string;
 }

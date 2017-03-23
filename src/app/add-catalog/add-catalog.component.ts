@@ -19,7 +19,11 @@ export class AddCatalogComponent implements OnInit {
   pdfFile: string;
   pubDate: any;
   catalog: FormGroup;
-  uploadError: boolean;
+  dateError: boolean;
+  pdfError: boolean;
+  imageError: boolean;
+  brandError: boolean;
+  nameError: boolean;
 
   private myDatePickerOptions: IMyOptions = {
         // other options...
@@ -29,7 +33,24 @@ export class AddCatalogComponent implements OnInit {
 
 
    onSubmit({value, valid}: {value: Catalog, valid: boolean}){
-    console.log(value);
+    if(!value.pubDate){
+      this.dateError = true;
+    }
+    if(!value.catalogThumb){
+      this.imageError = true;
+    }
+    if(!value.catalogPdf){
+      this.pdfError = true;
+    }
+    if(!value.brand){
+      this.brandError = true;
+    }
+    if(!value.catalogName){
+      this.nameError = true;
+    }
+    if(value.brand && value.catalogName && value.pubDate && value.catalogThumb && value.catalogPdf){
+      console.log(value);
+    }
   }
 
   onThumbChange(event) {
@@ -47,12 +68,8 @@ export class AddCatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    this.uploadError = false;
-
-
+  
     this.catalog = this.fb.group ({
-        
         brand: ['', Validators.required],
         catalogName: ['', Validators.required],
         pubDate: ['', Validators.required],
