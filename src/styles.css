@@ -91,6 +91,11 @@ input[type="file"] {
   font-weight: 900;
 }
 
+.uploadedImg {
+    width: 100px;
+    height: auto;
+}
+
 @media (max-width: 1200px) {
 
   .page-container {

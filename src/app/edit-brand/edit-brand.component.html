@@ -1,33 +1,55 @@
-<div class="title-bar"> <h1 class="page-title">Edit Brand</h1></div>
+<div class="title-bar">
+    <h1 class="page-title">Edit Brand</h1>
+</div>
 <div class="page-container">
+    <form class="form-horizontal" novalidate [formGroup]="brand" (ngSubmit)="onSubmit(brand)">
+        <fieldset>
 
-  <form class="form-horizontal" novalidate [formGroup]="addCatalog">
-  <fieldset>
-
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="brandname">Brand Name:</label>
-    <div class="col-md-4">
-    <input id="brandname" name="brandname" type="text" placeholder="" class="form-control input-md">
-
-    </div>
-  </div>
-
-  <!-- File Button -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="uploadbanner">Upload Banner (.jpg or .png, 1900px by 800px):</label>
-    <label class="custom-file-upload" for="uploadbanner">Select File</label>
-    <div class="upload-filename">{{bannerFile}}</div>
-    <div class="col-md-4">
-      <input id="uploadbanner" name="uploadbanner" class="input-file" type="file" accept=".jpg, .jpeg, .png" (change)="onBannerChange($event)">
-    </div>
-  </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Brand Name:</label>
+                <div class="col-md-4">
+                    <input id="name" formControlName="name" type="text" placeholder="" class="form-control input-md" required>
+                    <div class="alert alert-danger" *ngIf="brand.get('name').hasError('required') && brand.get('name').touched">
+                        <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Brand name is required!</p>
+                    </div>
+                </div>
+            </div>
 
 
-  <button type="submit" class="btn btn-lg btn-primary center-block"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+            <!-- File Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="displayImg">Upload Banner (.jpg or .png, 1900px by 800px):</label>
+                <label class="custom-file-upload" for="displayImg">Select File</label>
+
+                <div class="col-md-4">
+                    <img class="uploadedImg" *ngIf="this.bannerFileSrc" [src]="this.bannerFileSrc">
+                    <div class="alert alert-danger" *ngIf="this.uploadError">
+                        <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> A valid image file is required!</p>
+                    </div>
+                    <input id="displayImg" formControlName="displayImg" class="input-file" type="file" accept=".jpg, .jpeg, .png" (change)="onBannerChange($event)">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="link">Brand Link:</label>
+                <div class="col-md-4">
+                    <input id="link" formControlName="link" type="text" placeholder="" class="form-control input-md" required>
+                    <div class="alert alert-danger" *ngIf="brand.get('link').hasError('required') && brand.get('link').touched">
+                        <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Brand link is required!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-danger" *ngIf="this.errorMessage">
+                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{errorMessage}}</p>
+            </div>
+
+            <button type="submit" class="btn btn-lg btn-primary center-block"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
  Save Changes</button>
-  </fieldset>
-  </form>
-
+        </fieldset>
+    </form>
 
 </div>

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../brand.service';
-import { EmitterService } from '../emitter.service';
 import { Brand } from '../brand';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-brand',
@@ -12,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddBrandComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private brandService: BrandService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private brandService: BrandService) { }
 
   bannerFile: string;
   bannerFileSrc: any;
@@ -28,12 +27,17 @@ export class AddBrandComponent implements OnInit {
     if(this.bannerFileSrc && value.name && value.link){
       this.uploadError = false;
       value.displayImg = this.bannerFileSrc;
+
       this.brandService.addBrand(value) 
                        .subscribe(
-                       newBrand  => this.newBrand = newBrand,
-                       error =>  this.errorMessage = <any>error);
+                        newBrand => {
+                        console.log(newBrand)
+                        this.router.navigate(['/admin']);
+                       },
+                         error => {
+                          this.errorMessage = <any>error
+                       });
       
-
     }
    
   }

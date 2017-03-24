@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BrandService } from '../brand.service';
+import { Store } from '@ngrx/store';
+import { ADD_BRANDS } from '../reducers/brand.reducer';
+import { AppState } from '../app-state';
+
 
 @Component({
   selector: 'app-admin',
@@ -7,7 +13,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  public itemStringsLeft: any[] = [
+  brands: any;
+  auth: any;
+
+  constructor(private router: Router, private brandService: BrandService, public store: Store<AppState>) {
+
+    this.brands = store.select('brands');
+    this.auth = store.select('auth');
+  }
+
+   public itemStringsLeft: any[] = [
     {
       catalogId: 'enrospring2017',
       catalogName: 'Enro Spring 2017'
@@ -26,10 +41,31 @@ export class AdminComponent implements OnInit {
     }
   ];
 
-
-  constructor() {}
+  errorMessage: string;
 
   ngOnInit() {
+
+       this.store.select('login').subscribe(auth=>{
+        this.auth = auth;
+      })
+
+      if(this.auth){
+        this.brandService.getEverything() 
+                        .subscribe(
+                          everything => {
+                          this.store.dispatch({ type: ADD_BRANDS, payload: everything.brands });
+                        },
+                          error => {
+                            this.errorMessage = <any>error;
+                        });
+        this.store.select('brands').subscribe(brands=>{
+        this.brands = brands;
+      })
+    }
+    else {
+       this.router.navigate(['/login']);
+    }
+
   }
 
 }

@@ -19,9 +19,11 @@ import { EditCatalogComponent } from './edit-catalog/edit-catalog.component';
 import { EditBrandComponent } from './edit-brand/edit-brand.component';
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
-
+import { StoreModule } from '@ngrx/store';
 import { BrandService } from './brand.service';
-import { EmitterService } from './emitter.service';
+import { BrandReducer } from './reducers/brand.reducer';
+import { LoginReducer } from './reducers/login.reducer';
+
 
 const ROUTES = [
   {
@@ -89,10 +91,11 @@ const ROUTES = [
     CarouselModule,
     HttpModule,
     MyDatePickerModule,
+    StoreModule.provideStore({ brands: BrandReducer, login: LoginReducer }),
     ModalModule.forRoot(),
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [BrandService, EmitterService],
+  providers: [BrandService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

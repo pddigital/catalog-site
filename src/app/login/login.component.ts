@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../brand.service';
-import { EmitterService } from '../emitter.service';
 import { Login } from '../login';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { LOGIN } from '../reducers/login.reducer';
+import { AppState } from '../app-state';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private brandService: BrandService) { }
+  auth: any;
+
+  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private brandService: BrandService, public store: Store<AppState>) { 
+      this.auth = store.select('login');
+  }
 
   login: FormGroup;
   loginState: Login;
@@ -22,8 +28,18 @@ export class LoginComponent implements OnInit {
       console.log(value)
       this.brandService.authenticate(value) 
                        .subscribe(
-                       loginState  => this.loginState = loginState,
-                       error =>  this.errorMessage = <any>error);
+                        login => {
+                        if(login){
+                           this.store.dispatch({ type: LOGIN });
+                           this.router.navigate(['/admin']);
+                        }
+                        else if (!login) {
+                          this.errorMessage = "Invalid login credentials!";
+                        }
+                       },
+                         error => {
+                          this.errorMessage = <any>error;
+                       });
 
   }
 
