@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { IMyOptions, IMyDateModel } from 'mydatepicker';
 import { BrandService } from '../brand.service';
-import { Catalog } from '../catalog';
-import { AppState } from '../app-state';
+import { Catalog } from '../modals/catalog';
+import { AppState } from '../modals/app-state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-
+import { CREATE_CATALOG } from '../reducers/catalog.reducer';
 
 @Component({
   selector: 'app-add-catalog',
@@ -16,10 +16,11 @@ import { Store } from '@ngrx/store';
 
 export class AddCatalogComponent implements OnInit {
 
-  brands: any
+  brands: any;
+  auth: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private brandService: BrandService, public store: Store<AppState>) {
-
+        this.auth = store.select('auth');
         this.brands = store.select('brands');
   }
 
@@ -77,7 +78,7 @@ export class AddCatalogComponent implements OnInit {
       this.brandService.addCatalog(value) 
                        .subscribe(
                         newCatalog => {
-                         console.log(newCatalog);
+                         this.store.dispatch({ type: CREATE_CATALOG, payload: newCatalog });
                          this.router.navigate(['/admin']);
                        },
                          error => {
@@ -144,8 +145,14 @@ export class AddCatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-  
-    this.catalog = this.fb.group ({
+
+      this.store.select('login').subscribe(auth=>{
+        this.auth = true;
+      })
+
+      if(this.auth){
+        
+       this.catalog = this.fb.group ({
         brand: ['', Validators.required],
         catalogName: ['', Validators.required],
         pubDate: ['', Validators.required],
@@ -153,14 +160,16 @@ export class AddCatalogComponent implements OnInit {
         catalogPdf: ['', Validators.required]
       })
 
-      
-     this.store.select('brands').subscribe(brands=>{
+       this.store.select('brands').subscribe(brands=>{
         this.brands = brands;
         console.log(this.brands);
       })
 
-
+    }
+    else {
+       this.router.navigate(['/login']);
     }
 
+  }
 
   }

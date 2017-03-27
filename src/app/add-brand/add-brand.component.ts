@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../brand.service';
-import { Brand } from '../brand';
+import { Brand } from '../modals/brand';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { CREATE_BRAND } from '../reducers/brand.reducer';
+import { AppState } from '../modals/app-state';
 
 @Component({
   selector: 'app-add-brand',
@@ -10,8 +13,16 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-brand.component.css']
 })
 export class AddBrandComponent implements OnInit {
+  
+  brands: any;
+  auth: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private brandService: BrandService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private brandService: BrandService, public store: Store<AppState>) {
+    
+    this.brands = store.select('brands');
+    this.auth = store.select('auth');
+
+  }
 
   bannerFile: string;
   bannerFileSrc: any;
@@ -31,7 +42,8 @@ export class AddBrandComponent implements OnInit {
       this.brandService.addBrand(value) 
                        .subscribe(
                         newBrand => {
-                        console.log(newBrand)
+                        this.store.dispatch({ type: CREATE_BRAND, payload: newBrand });
+                        
                         this.router.navigate(['/admin']);
                        },
                          error => {
@@ -62,13 +74,25 @@ export class AddBrandComponent implements OnInit {
 
   ngOnInit() {
 
-    this.uploadError = false;
+        this.store.select('login').subscribe(auth=>{
+        this.auth = true;
+      })
 
-    this.brand = this.fb.group ({
-      name: ['', Validators.required],
-      displayImg: ['', Validators.required],
-      link: ['', Validators.required],
-    })
+      if(this.auth){
+        
+        this.uploadError = false;
+    
+        this.brand = this.fb.group ({
+          name: ['', Validators.required],
+          displayImg: ['', Validators.required],
+          link: ['', Validators.required],
+        })
+     
+    }
+    else {
+       this.router.navigate(['/login']);
+    }
+
   }
 
 }

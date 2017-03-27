@@ -87,7 +87,6 @@ app.get('*', (request, response)=> {
 
 passport.use(new LocalStrategy(
   (username, password, done)=> {
-    console.log(username, password)
     User.findOne({ username: username }, (err, user)=> {
       if (err) { return done(err); }
       else if (!user) {

@@ -1,0 +1,16 @@
+
+.row {
+  padding: 1%;
+}
+h2 {
+  font-size: 2em;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+}
+  
+.admin-buttons {
+  text-align: center;
+  width: 100%;
+  padding: 4%;
+}

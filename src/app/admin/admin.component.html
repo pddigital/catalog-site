@@ -6,68 +6,13 @@
         <a routerLink="/admin/add-brand"><button class="btn btn-lg btn-warning"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Brand</button></a>
         <a routerLink="/admin/add-catalog"><button class="btn btn-lg btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Catalog</button></a>
     </div>
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Enro
-                    </th>
-                    <th>
-                        <button class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Brand</button>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        Spring 2017
-                    </td>
-                    <td>
-                        <button class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Catalog</button>
-                        <app-delete-modal></app-delete-modal>
 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Fall 2016
-                    </td>
-                    <td>
-                        <button class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Catalog</button>
-                        <app-delete-modal></app-delete-modal>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Spring 2016
-                    </td>
-                    <td>
-                        <button class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Catalog</button>
-                        <app-delete-modal></app-delete-modal>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Fall 2015
-                    </td>
-                    <td>
-                        <button class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Catalog</button>
-                        <app-delete-modal></app-delete-modal>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Spring 2015
-                    </td>
-                    <td>
-                        <button class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Catalog</button>
-                        <app-delete-modal></app-delete-modal>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row" *ngFor="let brand of brands">
+        <div class="col-md-2"><img [src]="brand.displayImg" class="admin-thumb"></div>
+        <div class="col-md-5"><h2>{{brand.name}}</h2></div>
+        <div class="col-md-5 button-panel">
+          <a routerLink="/admin/edit-brand/{{brand._id}}"><button class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Brand</button></a>
+          <a routerLink="/admin/catalogs/{{brand._id}}"><button class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Catalogs</button></a>
+          </div>
     </div>
-
-</div>
+    </div>

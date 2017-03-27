@@ -1,6 +1,6 @@
 
 import { ActionReducer, Action, State } from '@ngrx/store';
-import { Brand } from '../brand';
+import { Brand } from '../modals/brand';
 
 export const ADD_BRANDS = 'ADD_BRANDS';
 export const CREATE_BRAND = 'CREATE_BRAND';

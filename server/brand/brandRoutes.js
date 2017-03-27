@@ -8,5 +8,4 @@ module.exports = app => {
   app.post('/api/brand', brandCtrl.createBrand);
   app.delete('/api/brand/:id', brandCtrl.deleteBrand);
   app.put('/api/brand/:id', brandCtrl.updateBrand);
-
 }

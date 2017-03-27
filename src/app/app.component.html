@@ -1,6 +1,6 @@
 <div class="login-panel">
-  <a routerLink="/login" routerLinkActive="active-sub-nav"><span class="login-link">Login</span></a>
-  <a routerLink="/logout" routerLinkActive="active-sub-nav"><span class="login-link">Logout</span></a>
+  <a *ngIf="!auth" routerLink="/login" routerLinkActive="active-sub-nav"><span class="login-link">Login</span></a>
+  <a *ngIf="auth" (click)="signOut()" routerLinkActive="active-sub-nav"><span class="login-link logout-link">Logout</span></a>
   <a routerLink="/admin" routerLinkActive="active-sub-nav"><span class="login-link">Admin</span></a>
 </div>
 
@@ -11,22 +11,16 @@
 
 <nav class="mobile-nav" [style.display]="hideMenu ? 'none' : 'inherit'">
 <ul>
-  <a routerLink="/brand/enro" routerLinkActive="active-nav" class="nav"><li>Enro</li></a>
-  <a routerLink="/brand/damon" routerLinkActive="active-nav" class="nav"><li>Damon</li></a>
-  <a routerLink="/brand/savile-row" routerLinkActive="active-nav" class="nav"><li>Savile Row</li></a>
-  <a routerLink="/brand/maker" routerLinkActive="active-nav" class="nav"><li>Maker & Company</li></a>
-  <a routerLink="/login" routerLinkActive="active-nav" class="nav" ><li>Login</li></a>
-  <a routerLink="/logout" routerLinkActive="active-nav" class="nav"><li>Logout</li></a>
+  <a *ngFor="let brand of brands" routerLink="/brand/{{brand._id}}" routerLinkActive="active-nav" class="nav"><li>{{brand.name}}</li></a>
+  <a *ngIf="!auth" routerLink="/login" routerLinkActive="active-nav" class="nav" ><li>Login</li></a>
+  <a *ngIf="auth" (click)="signOut()" routerLinkActive="active-sub-nav"><span class="login-link logout-link">Logout</span></a>
   <a routerLink="/admin" routerLinkActive="active-nav" class="nav"><li>Admin</li></a>
 </ul>
 </nav>
 
 <nav class="desktop-nav">
 <ul>
-  <a routerLink="/brand/enro" routerLinkActive="active-nav" class="nav"><li>Enro</li></a>
-  <a routerLink="/brand/damon" routerLinkActive="active-nav" class="nav"><li>Damon</li></a>
-  <a routerLink="/brand/savile-row" routerLinkActive="active-nav" class="nav"><li>Savile Row</li></a>
-  <a routerLink="/brand/maker" routerLinkActive="active-nav" class="nav"><li>Maker & Company</li></a>
+  <a *ngFor="let brand of brands" routerLink="/brand/{{brand._id}}" routerLinkActive="active-nav" class="nav"><li>{{brand.name}}</li></a>
 </ul>
 </nav>
 

@@ -30,6 +30,11 @@ header img {
   padding: 1%;
 }
 
+.logout-link {
+  color: #222255;
+  cursor: pointer;
+}
+
 footer {
   background-color: #222255;
   text-align: center;

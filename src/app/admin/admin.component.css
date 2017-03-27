@@ -1,19 +1,27 @@
 
-th {
+.row {
+  margin-bottom: 1%;
+}
+h2 {
   font-size: 2em;
   font-weight: 700;
+  padding: 0;
+  margin: 0;
+  line-height: 2em;
 }
-
-td {
-  font-size: 1.4em;
-}
-
-td button {
-  margin-right: 10px;
-}
-
+  
 .admin-buttons {
   text-align: center;
   width: 100%;
   padding: 4%;
+  margin-bottom: 1%;
+}
+
+.admin-thumb {
+  width: 100%;
+  border: 2px solid #222255;
+}
+
+.button-panel {
+    line-height: 2em;
 }

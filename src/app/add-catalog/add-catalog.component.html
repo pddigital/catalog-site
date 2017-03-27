@@ -10,11 +10,8 @@
                 <label class="col-md-4 control-label" for="brand">Brand:</label>
                 <div class="col-md-4">
                     <select id="brand" formControlName="brand" name="brand" class="form-control">
-                        <option value="Enro">Enro</option>
-                        <option value="Maker &amp; Company">Maker &amp; Company</option>
-                        <option value="Savile Row">Savile Row</option>
-                        <option value="Damon">Damon</option>
-             </select>
+                        <option *ngFor="let brand of brands" [value]="brand._id">{{brand.name}}</option>
+                    </select>
                     <div class="alert alert-danger" *ngIf="this.brandError">
                         <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Brand name is required!</p>
                     </div>

@@ -88,7 +88,7 @@ module.exports = {
             if (err) {
                 return res.status(500).json(err)
             }
-            return res.status(200).json(req.body)
+            return res.status(200).json(brand)
         });
     },
 }

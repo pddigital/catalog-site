@@ -23,7 +23,8 @@ import { StoreModule } from '@ngrx/store';
 import { BrandService } from './brand.service';
 import { BrandReducer } from './reducers/brand.reducer';
 import { LoginReducer } from './reducers/login.reducer';
-
+import { CatalogReducer } from './reducers/catalog.reducer';
+import { CatalogsComponent } from './catalogs/catalogs.component';
 
 const ROUTES = [
   {
@@ -45,6 +46,10 @@ const ROUTES = [
   {
     path: 'admin',
     component: AdminComponent
+  },
+      {
+    path: 'admin/catalogs/:id',
+    component: CatalogsComponent
   },
   {
     path: 'admin/add-catalog',
@@ -82,7 +87,8 @@ const ROUTES = [
     AddBrandComponent,
     EditCatalogComponent,
     EditBrandComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    CatalogsComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +97,7 @@ const ROUTES = [
     CarouselModule,
     HttpModule,
     MyDatePickerModule,
-    StoreModule.provideStore({ brands: BrandReducer, login: LoginReducer }),
+    StoreModule.provideStore({ brands: BrandReducer, login: LoginReducer, catalogs: CatalogReducer }),
     ModalModule.forRoot(),
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],

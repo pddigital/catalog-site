@@ -9,7 +9,13 @@ module.exports = {
     }
     else {
       return res.json(false);
-    }d
+    }
+  },
+  logOut(req, res, next) {
+        req.logout();
+        req.session.destroy((err)=> {
+        return res.json(true);
+        })
   },
   authenticate(req, res, next) {
       passport.authenticate('local', function(err, user, info) {

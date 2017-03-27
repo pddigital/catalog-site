@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandService } from '../brand.service';
-import { Login } from '../login';
+import { Login } from '../modals/login';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LOGIN } from '../reducers/login.reducer';
-import { AppState } from '../app-state';
+import { AppState } from '../modals/app-state';
 
 @Component({
   selector: 'app-login',

@@ -1,26 +1,8 @@
 <carousel>
-  <slide>
-    <a [routerLink]="['/brand/enro']"><img src="assets/enro.jpg" class="slide-img" alt="First slide">
+  <slide *ngFor="let brand of brands">
+    <a routerLink="/brand/{{brand._id}}"><img [src]="brand.displayImg" class="slide-img" alt="{{brand.name}}">
     <div class="carousel-caption">
-     <h3>Enro</h3>
+     <h3>{{brand.name}}</h3>
    </div></a>
- </slide>
-  <slide>
-    <img src="assets/damon.jpg" class="slide-img" alt="Second slide">
-    <div class="carousel-caption">
-     <h3>Damon</h3>
-   </div>
-  </slide>
-  <slide>
-    <img src="assets/savile-row.jpg" class="slide-img" alt="Third slide">
-    <div class="carousel-caption">
-     <h3>Savile Row</h3>
-   </div>
-  </slide>
-  <slide>
-    <img src="assets/maker.jpg" class="slide-img" alt="Third slide">
-    <div class="carousel-caption">
-     <h3>Maker & Company</h3>
-   </div>
-  </slide>
+   </slide>
 </carousel>
