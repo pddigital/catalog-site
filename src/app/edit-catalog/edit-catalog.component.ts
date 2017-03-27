@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {IMyOptions, IMyDateModel} from 'mydatepicker';
+import { IMyOptions, IMyDateModel } from 'mydatepicker';
+import { BrandService } from '../brand.service';
+import { Brand } from '../modals/brand';
+import { Catalog } from '../modals/catalog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { UPDATE_CATALOG } from '../reducers/catalog.reducer';
+import { AppState } from '../modals/app-state';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-edit-catalog',
@@ -8,34 +17,202 @@ import {IMyOptions, IMyDateModel} from 'mydatepicker';
 })
 export class EditCatalogComponent implements OnInit {
 
+  brands: any;
+  catalogs: any;
+  auth: any;
 
-    thumbFile: string;
-    pdfFile: string;
-    pubDate: any;
+  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private brandService: BrandService, public store: Store<AppState>) {
+        this.auth = store.select('auth');
+        this.brands = store.select('brands');
+        this.catalogs = store.select('catalogs');
+  }
 
-    private myDatePickerOptions: IMyOptions = {
-          // other options...
-          dateFormat: 'mm.dd.yyyy',
-    };
+  thumbFile: string;
+  thumbFileSrc: any;
+  pdfFile: string;
+  pdfFileSrc: any;
+  pubDate: any;
+  catalog: FormGroup;
+  dateError: boolean;
+  pdfError: boolean;
+  imageError: boolean;
+  brandError: boolean;
+  nameError: boolean;
+  newCatalog: any;
+  errorMessage: string;
+  catalogId: string;
+  startingDate: any;
+  
+  getFileExtension = (filename)=> {
+    return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+  }
+
+  private myDatePickerOptions: IMyOptions = {
+        // other options...
+        dateFormat: 'mm.dd.yyyy',
+        showTodayBtn: true
+  };
 
 
-    constructor() {
+   onSubmit({value, valid}: {value: Catalog, valid: boolean}){
+    if(!this.pubDate){
+      this.dateError = true;
 
     }
+    if(!this.thumbFileSrc){
+      this.imageError = true;
 
-    onThumbChange(event) {
+    }
+    if(!this.pdfFileSrc){
+      this.pdfError = true;
+
+    }
+    if(!value.brand){
+      this.brandError = true;
+
+    }
+    if(!value.catalogName){
+      this.nameError = true;
+
+    }
+    if(value.brand && value.catalogName && this.thumbFileSrc && this.pdfFileSrc && this.pubDate){
+      value.catalogThumb = this.thumbFileSrc;
+      value.catalogPdf = this.pdfFileSrc;
+
+      if(this.pubDate.date){
+        this.pubDate.date.month = this.pubDate.date.month - 1;
+        value.pubDate = moment(this.pubDate.date).toDate();
+      }
+      else {
+        value.pubDate = this.pubDate;
+      }
+      
+
+      let updatedCatalog;
+      updatedCatalog = value;
+      updatedCatalog._id = this.catalogId;
+      
+
+      this.brandService.editCatalog(updatedCatalog, updatedCatalog._id) 
+                       .subscribe(
+                        newCatalog => {
+                         this.store.dispatch({ type: UPDATE_CATALOG, payload: updatedCatalog });
+                         this.router.navigate(['/admin']);
+                       },
+                         error => {
+                          this.errorMessage = <any>error
+                       });
+
+    }
+  }
+
+  onThumbChange(event) {
+
+    this.imageError = false;
+    this.thumbFile = '';
+    this.thumbFileSrc = '';
+
+    let ext = this.getFileExtension(event.srcElement.files[0].name);
+
+    if(ext !== 'jpg' && ext !== 'JPG' && ext !=='png' && ext !== 'PNG'){
+      this.imageError = true;
+      return;
+    }
+
+    this.brandService.upload(event.srcElement).then((data)=> {      
+      this.thumbFileSrc = data;
+      this.thumbFileSrc = this.thumbFileSrc.fileName;
       this.thumbFile = event.srcElement.files[0].name;
-    }
+    })
+    .catch((err)=> {
+      this.imageError = true;
+      alert('Please upload an image file, less than 10MB!');
+    }); 
 
-    onPdfChange(event) {
+  }
+
+  onPdfChange(event) {
+
+    this.pdfError = false;
+    this.pdfFile = '';
+    this.pdfFileSrc = '';
+
+    let ext = this.getFileExtension(event.srcElement.files[0].name);
+
+    if(ext !== 'pdf' && ext !== 'PDF'){
+      this.pdfError = true;
+      return;
+    }
+  
+    this.brandService.upload(event.srcElement).then((data)=> {   
+      this.pdfFileSrc = data;
+      this.pdfFileSrc = this.pdfFileSrc.fileName;
       this.pdfFile = event.srcElement.files[0].name;
+    })
+    .catch((err)=> {
+      this.pdfError = true;
+      alert('Please upload an pdf file, less than 10MB!');
+    }); 
+
+  }
+
+  onDateChanged(event: IMyDateModel) {
+    this.startingDate = event.jsdate;
+     // event properties are: event.date, event.jsdate, event.formatted and event.epoc
+  }
+
+  ngOnInit() {
+
+      this.store.select('login').subscribe(auth=>{
+        this.auth = true;
+      })
+
+      if(this.auth){
+        
+      let currentCatalog;
+
+      this.store.select('brands').subscribe(brands=>{
+        this.brands = brands;
+      })
+
+      this.store.select('catalogs').subscribe(catalogs=>{
+
+          this.catalogs = catalogs;
+
+          currentCatalog = this.catalogs.filter((catalog)=>{
+          return catalog._id === this.route.snapshot.params['id'];
+        })
+
+        currentCatalog = currentCatalog[0];
+      })
+
+        this.thumbFileSrc = currentCatalog.catalogThumb;
+        this.pdfFileSrc = currentCatalog.catalogPdf;
+        this.pdfFile = currentCatalog.catalogPdf;
+        this.catalogId = currentCatalog._id;
+
+        let thisDate = new Date(currentCatalog.pubDate);
+        
+        this.pubDate = {
+          date: {
+            month: thisDate.getMonth() + 1,
+            day: thisDate.getDate(),
+            year: thisDate.getFullYear()
+          }
+        }
+
+        this.catalog = this.fb.group ({
+        brand: [currentCatalog.brand, Validators.required],
+        catalogName: [currentCatalog.catalogName, Validators.required],
+        pubDate: ['', Validators.required],
+        catalogThumb: ['', Validators.required],
+        catalogPdf: ['', Validators.required]
+      })
+
+    }
+    else {
+       this.router.navigate(['/login']);
     }
 
-    onDateChanged(event: IMyDateModel) {
-       // event properties are: event.date, event.jsdate, event.formatted and event.epoc
-    }
-
-    ngOnInit() {
-    }
-
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BrandService } from '../brand.service';
-import { Brand } from '../modals/brand';
+import { Store } from '@ngrx/store';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppState } from '../modals/app-state';
 
 
 @Component({
@@ -12,13 +12,39 @@ import { Brand } from '../modals/brand';
 
 export class BrandComponent implements OnInit {
 
-  brandName =  this.route.snapshot.params['name'];
+  brands: any;
+  catalogs: any;
+  currentCatalogs: any;
+  currentBrand: any;
+  brandId: any;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, public store: Store<AppState>) { 
+     this.brands = store.select('brands');
+     this.catalogs = store.select('catalogs');
+  }
 
-  ngOnInit() {
+ ngOnInit() {
+
+      this.brandId = this.route.snapshot.params['id'];
+
+      
+      this.store.select('brands').subscribe(brands=>{
+        this.brands = brands;
+        
+        this.currentBrand = this.brands.filter((brand)=>{
+          return brand._id === this.brandId;
+        })
+        this.currentBrand = this.currentBrand[0];
+      })
 
 
-    console.log(this.route.snapshot.params['name']);
+      this.store.select('catalogs').subscribe(catalogs=>{
+        this.catalogs = catalogs;
+        
+        this.currentCatalogs = this.catalogs.filter((catalog)=>{
+          return catalog.brand === this.brandId;
+        })
+      })
+
   }
 }

@@ -1,16 +1,28 @@
-
 .row {
-  padding: 1%;
+    padding: 1%;
 }
+
 h2 {
-  font-size: 2em;
-  font-weight: 700;
-  padding: 0;
-  margin: 0;
+    font-size: 2em;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
 }
-  
+
 .admin-buttons {
-  text-align: center;
-  width: 100%;
-  padding: 4%;
+    text-align: center;
+    width: 100%;
+    padding: 4%;
+    margin-bottom: 1%;
 }
+
+button {
+    margin-right: 10px;
+}
+
+.admin-thumb {
+    width: 100%;
+    border: 2px solid #222255;
+}
+
+.button-panel {}

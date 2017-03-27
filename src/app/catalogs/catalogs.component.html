@@ -2,15 +2,18 @@
     <h1 class="page-title">{{brandName}} Catalogs</h1>
 </div>
 <div class="page-container">
-     <div class="admin-buttons">
+    <div class="admin-buttons">
         <a routerLink="/admin/add-brand"><button class="btn btn-lg btn-warning"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Brand</button></a>
         <a routerLink="/admin/add-catalog"><button class="btn btn-lg btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Catalog</button></a>
     </div>
     <div class="row" *ngFor="let catalog of theseCatalogs">
-        <div class="col-md-6"><h2>{{catalog.catalogName}}</h2></div>
-        <div class="col-md-6">
-          <a routerLink="/admin/edit-catalog/{{catalog._id}}"><button class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Catalog</button></a>
-          <button (click)="deleteCatalog(catalog._id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        <div class="col-md-2"><img [src]="catalog.catalogThumb" class="admin-thumb"></div>
+        <div class="col-md-5">
+            <h2>{{catalog.catalogName}}</h2>
+        </div>
+        <div class="col-md-5 button-panel">
+            <a routerLink="/admin/edit-catalog/{{catalog._id}}"><button class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Catalog</button></a>
+            <app-delete-modal></app-delete-modal>
         </div>
     </div>
-    </div>
+</div>

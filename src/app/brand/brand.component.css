@@ -1,18 +1,27 @@
 .catalog-container {
-  display: flex;
-  align-content: space-around;
-  flex-direction: row;
-  flex-wrap: wrap;
+    display: flex;
+    align-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .featured-catalog {
-  background-color: blue;
-  width: 30%;
-  margin: 1%;
-  font-size: 2em;
-  color: white;
-  font-weight: 900;
-  text-align: center;
-  padding-top: 8%;
-  padding-bottom: 8%;
+    width: 30%;
+    margin: 1%;
+    font-size: 2em;
+    color: white;
+    font-weight: 900;
+    text-align: center;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    background-size: cover;
+}
+
+.featured-catalog span {
+    background-color: #222255;
+    opacity: .6;
+    padding: 1%;
+    width: 100%;
+    color: white;
+    display: block;
 }

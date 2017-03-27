@@ -1,25 +1,21 @@
-<div class="title-bar"> <h1 class="page-title">Enro</h1></div>
+<div class="title-bar">
+    <h1 class="page-title">{{currentBrand.name}}</h1>
+</div>
 <div class="page-container">
 
 
 
-  <div class="catalog-container">
-
-    <div class="featured-catalog">Spring 2017</div>
-
-    <div class="featured-catalog">Spring 2017</div>
+    <div class="catalog-container">
 
 
-        <div class="featured-catalog">Spring 2017</div>
+        <div *ngFor="let catalog of currentCatalogs" class="featured-catalog" [ngStyle]="{'background-image':'url(' + catalog.catalogThumb + ')'}">
+            <a routerLink="/catalog/{{catalog._id}}">
+                <span>{{catalog.catalogName}}</span>
+            </a>
+        </div>
 
 
-            <div class="featured-catalog">Spring 2017</div>
-
-
-                <div class="featured-catalog">Spring 2017</div>
-
-
-  </div>
+    </div>
 
 
 

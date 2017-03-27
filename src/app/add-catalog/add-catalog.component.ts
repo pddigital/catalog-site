@@ -39,7 +39,7 @@ export class AddCatalogComponent implements OnInit {
   errorMessage: string;
   
   getFileExtension = (filename)=> {
-  return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+    return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
   }
 
   private myDatePickerOptions: IMyOptions = {
