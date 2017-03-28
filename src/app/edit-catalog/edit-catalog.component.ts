@@ -97,7 +97,7 @@ export class EditCatalogComponent implements OnInit {
                        .subscribe(
                         newCatalog => {
                          this.store.dispatch({ type: UPDATE_CATALOG, payload: updatedCatalog });
-                         this.router.navigate(['/admin']);
+                         this.router.navigate([`/catalogs/${value.brand}`]);
                        },
                          error => {
                           this.errorMessage = <any>error
@@ -162,12 +162,6 @@ export class EditCatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-
-      this.store.select('login').subscribe(auth=>{
-        this.auth = true;
-      })
-
-      if(this.auth){
         
       let currentCatalog;
 
@@ -210,9 +204,5 @@ export class EditCatalogComponent implements OnInit {
       })
 
     }
-    else {
-       this.router.navigate(['/login']);
-    }
-
-  }
+  
 }

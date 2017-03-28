@@ -6,22 +6,39 @@
 }
 
 .featured-catalog {
+    height: 300px;
     width: 30%;
     margin: 1%;
     font-size: 2em;
     color: white;
     font-weight: 900;
     text-align: center;
-    padding-top: 8%;
-    padding-bottom: 8%;
+    line-height: 300px;
+    padding: 0;
+}
+
+.inner-container {
+    width: 100%;
     background-size: cover;
 }
 
-.featured-catalog span {
-    background-color: #222255;
-    opacity: .6;
+.inner-container span {
     padding: 1%;
     width: 100%;
     color: white;
-    display: block;
+    display: inline;
+    text-shadow: 2px 2px black;
+}
+
+@media (max-width: 1024px) {
+    .catalog-container {
+        display: block;
+    }
+    .featured-catalog {
+        width: 100%;
+        margin-bottom: 2%;
+    }
+    .inner-container {
+        background-position: center;
+    }
 }

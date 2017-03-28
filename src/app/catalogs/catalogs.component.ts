@@ -25,14 +25,7 @@ export class CatalogsComponent implements OnInit {
    }
 
   ngOnInit() {
-
-       console.log(this.route.snapshot.params['id']);
-
-       this.store.select('login').subscribe(auth=>{
-        this.auth = true;
-      })
-
-      if(this.auth){
+    
         this.store.select('brands').subscribe(brands=>{
         this.brands = brands;
 
@@ -55,11 +48,7 @@ export class CatalogsComponent implements OnInit {
       
       })
     }
-    else {
-       this.router.navigate(['/login']);
-    }
 
-  }
 }
 
 

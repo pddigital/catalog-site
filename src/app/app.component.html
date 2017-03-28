@@ -1,31 +1,55 @@
-<div class="login-panel">
-  <a *ngIf="!auth" routerLink="/login" routerLinkActive="active-sub-nav"><span class="login-link">Login</span></a>
-  <a *ngIf="auth" (click)="signOut()" routerLinkActive="active-sub-nav"><span class="login-link logout-link">Logout</span></a>
-  <a routerLink="/admin" routerLinkActive="active-sub-nav"><span class="login-link">Admin</span></a>
-</div>
+<div class="body-container">
+    <div class="login-panel">
+        <a *ngIf="!auth" routerLink="/login" routerLinkActive="active-sub-nav"><span class="login-link">Login</span></a>
+        <a *ngIf="auth" (click)="signOut()" routerLinkActive="active-sub-nav"><span class="login-link logout-link">Logout</span></a>
+        <a *ngIf="auth" routerLink="/admin" routerLinkActive="active-sub-nav"><span class="login-link">Admin</span></a>
+        <a *ngIf="auth" routerLink="/add-brand" routerLinkActive="active-sub-nav"><span class="login-link">Add Brand</span></a>
+        <a *ngIf="auth" routerLink="/add-catalog" routerLinkActive="active-sub-nav"><span class="login-link">Add Catalog</span></a>
+
+    </div>
 
 
-<header>
-<i class="fa fa-bars hamburger" aria-hidden="true" (click)="toggleHamburger()"></i>
-<a routerLink="/"><img src="./assets/tag-logo.png" alt="The Apparel Group">The Apparel Group Catalog</a> </header>
-
-<nav class="mobile-nav" [style.display]="hideMenu ? 'none' : 'inherit'">
-<ul>
-  <a *ngFor="let brand of brands" routerLink="/brand/{{brand._id}}" routerLinkActive="active-nav" class="nav"><li>{{brand.name}}</li></a>
-  <a *ngIf="!auth" routerLink="/login" routerLinkActive="active-nav" class="nav" ><li>Login</li></a>
-  <a *ngIf="auth" (click)="signOut()" routerLinkActive="active-sub-nav"><span class="login-link logout-link">Logout</span></a>
-  <a routerLink="/admin" routerLinkActive="active-nav" class="nav"><li>Admin</li></a>
-</ul>
-</nav>
-
-<nav class="desktop-nav">
-<ul>
-  <a *ngFor="let brand of brands" routerLink="/brand/{{brand._id}}" routerLinkActive="active-nav" class="nav"><li>{{brand.name}}</li></a>
-</ul>
-</nav>
+    <header>
+        <i class="fa fa-bars hamburger" aria-hidden="true" (click)="toggleHamburger()"></i>
+        <a routerLink="/"><img src="./assets/tag-logo.png" alt="The Apparel Group">The Apparel Group Catalog</a>
+    </header>
 
 
-<div>
-  <router-outlet></router-outlet>
+    <nav class="mobile-nav" [style.display]="hideMenu ? 'none' : 'inherit'">
+        <ul>
+            <a *ngFor="let brand of brands" routerLink="/brand/{{brand._id}}" routerLinkActive="active-nav" class="nav">
+                <li>{{brand.name}}</li>
+            </a>
+            <a *ngIf="!auth" routerLink="/login" routerLinkActive="active-sub-nav" class="nav">
+                <li>Login</li>
+            </a>
+            <a *ngIf="auth" (click)="signOut()" routerLinkActive="active-sub-nav" class="nav">
+                <li>Logout</li>
+            </a>
+            <a *ngIf="auth" routerLink="/admin" routerLinkActive="active-sub-nav" class="nav">
+                <li>Admin</li>
+            </a>
+            <a *ngIf="auth" routerLink="/add-brand" routerLinkActive="active-sub-nav" class="nav">
+                <li>Add Brand</li>
+            </a>
+            <a *ngIf="auth" routerLink="/add-catalog" routerLinkActive="active-sub-nav" class="nav">
+                <li>Add Catalog</li>
+            </a>
+
+        </ul>
+    </nav>
+
+    <nav class="desktop-nav">
+        <ul>
+            <a *ngFor="let brand of brands" routerLink="/brand/{{brand._id}}" routerLinkActive="active-nav" class="nav">
+                <li>{{brand.name}}</li>
+            </a>
+        </ul>
+    </nav>
+
+
+    <div>
+        <router-outlet></router-outlet>
+    </div>
 </div>
 <footer>Copyright(c) 2017 The Apparel Group, Ltd.</footer>

@@ -3,18 +3,19 @@
 </div>
 <div class="page-container">
 
-
+    <p class="empty-msg" *ngIf="!currentCatalogs || currentCatalogs.length === 0">There are no catalogs for this brand!</p>
 
     <div class="catalog-container">
 
 
-        <div *ngFor="let catalog of currentCatalogs" class="featured-catalog" [ngStyle]="{'background-image':'url(' + catalog.catalogThumb + ')'}">
+        <div *ngFor="let catalog of currentCatalogs" class="featured-catalog">
             <a routerLink="/catalog/{{catalog._id}}">
-                <span>{{catalog.catalogName}}</span>
+                <div class="inner-container" [ngStyle]="{'background-image':'url(' + catalog.catalogThumb + ')'}">
+                    <span></span>
+                </div>
             </a>
+
         </div>
-
-
     </div>
 
 

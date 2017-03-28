@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
      this.brandService.logOut() 
                         .subscribe(
                           response => {
-                          console.log(response)
                           this.store.dispatch({ type: LOGOUT });
                           this.router.navigate(['/login']);
                         },

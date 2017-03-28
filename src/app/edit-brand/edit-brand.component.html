@@ -5,7 +5,7 @@
     <form class="form-horizontal" novalidate [formGroup]="brand" (ngSubmit)="onSubmit(brand)">
         <fieldset>
 
-                  <!-- Text input-->
+            <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="name">Brand Name:</label>
                 <div class="col-md-4">
@@ -46,10 +46,12 @@
             <div class="alert alert-danger" *ngIf="this.errorMessage">
                 <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{errorMessage}}</p>
             </div>
-            
-            <button type="submit" class="btn btn-lg btn-primary center-block"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
- Save Changes</button>
+            <br />
+            <button type="submit" class="btn btn-lg btn-primary center-block"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Save Changes</button>
+
         </fieldset>
     </form>
 
+    <br /><br /><br />
+    <button *ngIf="!theseCatalogs || theseCatalogs.length === 0" (click)="deleteBrand()" class="btn btn-lg btn-danger center-block"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete Brand</button>
 </div>

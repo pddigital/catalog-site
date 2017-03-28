@@ -74,12 +74,6 @@ export class AddBrandComponent implements OnInit {
 
   ngOnInit() {
 
-        this.store.select('login').subscribe(auth=>{
-        this.auth = true;
-      })
-
-      if(this.auth){
-        
         this.uploadError = false;
     
         this.brand = this.fb.group ({
@@ -89,10 +83,5 @@ export class AddBrandComponent implements OnInit {
         })
      
     }
-    else {
-       this.router.navigate(['/login']);
-    }
-
-  }
 
 }

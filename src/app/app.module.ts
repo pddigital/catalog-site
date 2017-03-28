@@ -25,6 +25,7 @@ import { BrandReducer } from './reducers/brand.reducer';
 import { LoginReducer } from './reducers/login.reducer';
 import { CatalogReducer } from './reducers/catalog.reducer';
 import { CatalogsComponent } from './catalogs/catalogs.component';
+import { AuthGuardService } from './auth-guard.service';
 
 const ROUTES = [
   {
@@ -45,26 +46,32 @@ const ROUTES = [
   },
   {
     path: 'admin',
+    canActivate:[AuthGuardService],
     component: AdminComponent
   },
       {
-    path: 'admin/catalogs/:id',
+    path: 'catalogs/:id',
+    canActivate:[AuthGuardService],
     component: CatalogsComponent
   },
   {
-    path: 'admin/add-catalog',
+    path: 'add-catalog',
+    canActivate:[AuthGuardService],
     component: AddCatalogComponent
   },
   {
-    path: 'admin/add-brand',
+    path: 'add-brand',
+    canActivate:[AuthGuardService],
     component: AddBrandComponent
   },
   {
-    path: 'admin/edit-brand/:id',
+    path: 'edit-brand/:id',
+    canActivate:[AuthGuardService],
     component: EditBrandComponent
   },
   {
-    path: 'admin/edit-catalog/:id',
+    path: 'edit-catalog/:id',
+    canActivate:[AuthGuardService],
     component: EditCatalogComponent
   },
   {
@@ -101,7 +108,7 @@ const ROUTES = [
     ModalModule.forRoot(),
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [BrandService],
+  providers: [BrandService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

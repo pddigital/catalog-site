@@ -14,13 +14,14 @@ export class CatalogPageComponent implements OnInit {
 
   catalogs: any;
   currentCatalog: any;
+  catalogId: any;
 
   constructor(private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, public store: Store<AppState>) { }
 
   
   public innerHtml() {
           return this.sanitizer.bypassSecurityTrustHtml( 
-              `<object data="${this.currentCatalog}" type="application/pdf"></object>`);
+              `<object data="${this.currentCatalog.catalogPdf}" type="application/pdf" style="width: 100%; height: 800px;"></object>`);
   }
 
   ngOnInit() {

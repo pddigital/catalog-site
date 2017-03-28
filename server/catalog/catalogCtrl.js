@@ -33,6 +33,7 @@ module.exports = {
             if (err) {
                 return res.status(500).json(err)
             }
+            console.log(catalog)
             return res.status(200).json(catalog)
         });
     },

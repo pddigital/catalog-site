@@ -25,28 +25,15 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
 
-       this.store.select('login').subscribe(auth=>{
-        this.auth = true;
-      })
-
-      if(this.auth){
-
         this.store.select('brands').subscribe(brands=>{
         this.brands = brands;
-        console.log(this.brands)
         })
       
         this.store.select('catalogs').subscribe(catalogs=>{
         this.catalogs = catalogs;
-        console.log(this.catalogs);
         })
       
   
     }
-    else {
-       this.router.navigate(['/login']);
-    }
-
-  }
-
+  
 }

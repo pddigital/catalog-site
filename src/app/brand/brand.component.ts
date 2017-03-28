@@ -25,14 +25,14 @@ export class BrandComponent implements OnInit {
 
  ngOnInit() {
 
-      this.brandId = this.route.snapshot.params['id'];
-
-      
+      this.brandId = this.route.params.subscribe(params => {
+        
+    
       this.store.select('brands').subscribe(brands=>{
         this.brands = brands;
         
         this.currentBrand = this.brands.filter((brand)=>{
-          return brand._id === this.brandId;
+          return brand._id === params['id'];
         })
         this.currentBrand = this.currentBrand[0];
       })
@@ -42,9 +42,9 @@ export class BrandComponent implements OnInit {
         this.catalogs = catalogs;
         
         this.currentCatalogs = this.catalogs.filter((catalog)=>{
-          return catalog.brand === this.brandId;
+          return catalog.brand === params['id'];
         })
       })
-
+    })
   }
 }

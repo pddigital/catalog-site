@@ -4,7 +4,7 @@ import { Brand } from '../modals/brand';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UPDATE_BRAND } from '../reducers/brand.reducer';
+import { UPDATE_BRAND, DELETE_BRAND } from '../reducers/brand.reducer';
 import { AppState } from '../modals/app-state';
 
 @Component({
@@ -15,11 +15,14 @@ import { AppState } from '../modals/app-state';
 export class EditBrandComponent implements OnInit {
 
   brands: any;
-    auth: any;
+  catalogs: any;
+  theseCatalogs: any;
+  auth: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private brandService: BrandService, public store: Store<AppState>) {
     
     this.brands = store.select('brands');
+    this.brands = store.select('catalogs');
     this.auth = store.select('auth');
 
   }
@@ -74,13 +77,20 @@ export class EditBrandComponent implements OnInit {
 
   }
 
+  deleteBrand() {
+         this.brandService.removeBrand(this.route.snapshot.params['id']) 
+                       .subscribe(
+                        deletedCatalog => {
+                         this.store.dispatch({ type: DELETE_BRAND, payload: deletedCatalog });
+                         this.router.navigate(['/admin']);
+                       },
+                         error => {
+                          this.errorMessage = <any>error
+                       });
+  }
+
+
   ngOnInit() {
-
-        this.store.select('login').subscribe(auth=>{
-        this.auth = true;
-      })
-
-      if(this.auth){
 
         let currentBrand;
         
@@ -106,11 +116,17 @@ export class EditBrandComponent implements OnInit {
           displayImg: ['', Validators.required],
           link: [currentBrand.link, Validators.required],
         })
+
+        this.store.select('catalogs').subscribe(catalogs=>{
+        this.catalogs = catalogs;
+        })
+
+        let theseCatalogs = this.catalogs.filter((catalog)=>{
+          return catalog.brand === this.route.snapshot.params['id'];
+        })
+        
+        this.theseCatalogs = theseCatalogs;
      
     }
-    else {
-       this.router.navigate(['/login']);
-    }
-
-  }
+  
 }

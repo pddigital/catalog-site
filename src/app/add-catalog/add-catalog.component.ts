@@ -140,17 +140,10 @@ export class AddCatalogComponent implements OnInit {
 
   onDateChanged(event: IMyDateModel) {
     this.pubDate = event.jsdate;
-    console.log(this.pubDate);
      // event properties are: event.date, event.jsdate, event.formatted and event.epoc
   }
 
   ngOnInit() {
-
-      this.store.select('login').subscribe(auth=>{
-        this.auth = true;
-      })
-
-      if(this.auth){
         
        this.catalog = this.fb.group ({
         brand: ['', Validators.required],
@@ -162,14 +155,8 @@ export class AddCatalogComponent implements OnInit {
 
        this.store.select('brands').subscribe(brands=>{
         this.brands = brands;
-        console.log(this.brands);
       })
 
     }
-    else {
-       this.router.navigate(['/login']);
-    }
-
-  }
 
   }
