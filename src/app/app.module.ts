@@ -35,7 +35,7 @@ const ROUTES = [
     component: HomeComponent
   },
   {
-    path: 'brand/:slug/',
+    path: 'brand/:slug',
     component: BrandComponent
   },
   {
@@ -77,7 +77,7 @@ const ROUTES = [
     component: EditCatalogComponent
   },
   {
-    path: '/**',
+    path: '**',
     component: PageNotFoundComponent
   }
 ]

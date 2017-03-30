@@ -25,6 +25,8 @@ export class BrandComponent implements OnInit {
 
  ngOnInit() {
 
+    console.log('this hit')
+
       this.brandId = this.route.params.subscribe(params => {
         
     
