@@ -11,10 +11,10 @@ export class BrandService {
 
   constructor(private http: Http) { }
 
-  private loginUrl = 'http://localhost:3000/api/login';
-  private dashUrl = 'http://localhost:3000/api/everything';
-  private brandUrl = 'http://localhost:3000/api/brand';
-  private catalogUrl = 'http://localhost:3000/api/catalog';
+  private loginUrl = '/api/login';
+  private dashUrl = '/api/everything';
+  private brandUrl = '/api/brand';
+  private catalogUrl = '/api/catalog';
 
 
   authenticate(body: Object): Observable<Login>{

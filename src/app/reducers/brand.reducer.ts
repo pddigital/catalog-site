@@ -9,7 +9,7 @@ export const DELETE_BRAND = 'DELETE_BRAND';
 
 const initialState: any = [];
 
-export const BrandReducer: ActionReducer<any> = (state = initialState, action: Action) => {
+export function BrandReducer(state = initialState, action: Action) {
  switch (action.type) {
     case 'ADD_BRANDS':
       return action.payload;

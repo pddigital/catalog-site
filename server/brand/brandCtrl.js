@@ -61,8 +61,17 @@ module.exports = {
             if (err) {
                 return res.status(500).json(err);
             }
+
+            let brandsWithSlugs = [];
+
+            brands.forEach((brand) => {
+                let copy = Object.assign({}, brand._doc);
+                copy.slug = brand.name.toLowerCase().replace(/&/g, "and").replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').split(' ').join('-');
+                brandsWithSlugs.push(copy);
+            })
+
             req.dashboard = {}
-            req.dashboard.brands = brands;
+            req.dashboard.brands = brandsWithSlugs;
             next();
         });
     },

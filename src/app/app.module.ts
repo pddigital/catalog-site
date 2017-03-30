@@ -26,6 +26,8 @@ import { LoginReducer } from './reducers/login.reducer';
 import { CatalogReducer } from './reducers/catalog.reducer';
 import { CatalogsComponent } from './catalogs/catalogs.component';
 import { AuthGuardService } from './auth-guard.service';
+import {APP_BASE_HREF} from '@angular/common';
+
 
 const ROUTES = [
   {
@@ -33,7 +35,7 @@ const ROUTES = [
     component: HomeComponent
   },
   {
-    path: 'brand/:id',
+    path: 'brand/:slug/',
     component: BrandComponent
   },
   {
@@ -75,7 +77,7 @@ const ROUTES = [
     component: EditCatalogComponent
   },
   {
-    path: '**',
+    path: '/**',
     component: PageNotFoundComponent
   }
 ]
@@ -108,7 +110,7 @@ const ROUTES = [
     ModalModule.forRoot(),
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [BrandService, AuthGuardService],
+  providers: [BrandService, AuthGuardService, {provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

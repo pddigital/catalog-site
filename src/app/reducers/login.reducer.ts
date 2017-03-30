@@ -6,7 +6,7 @@ export const LOGOUT = 'LOGOUT';
 
 const initialState: boolean = false;
 
-export const LoginReducer: ActionReducer<any> = (state = initialState, action: Action) => {
+export function LoginReducer(state = initialState, action: Action) {
  switch (action.type) {
     case 'LOGIN':
       return true;

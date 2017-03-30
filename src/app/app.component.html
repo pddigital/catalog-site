@@ -17,7 +17,7 @@
 
     <nav class="mobile-nav" [style.display]="hideMenu ? 'none' : 'inherit'">
         <ul>
-            <a *ngFor="let brand of brands" routerLink="/brand/{{brand._id}}" routerLinkActive="active-nav" class="nav">
+            <a *ngFor="let brand of brands" routerLink="/brand/{{brand.slug}}" routerLinkActive="active-nav" class="nav">
                 <li>{{brand.name}}</li>
             </a>
             <a *ngIf="!auth" routerLink="/login" routerLinkActive="active-sub-nav" class="nav">
@@ -41,7 +41,7 @@
 
     <nav class="desktop-nav">
         <ul>
-            <a *ngFor="let brand of brands" routerLink="/brand/{{brand._id}}" routerLinkActive="active-nav" class="nav">
+            <a *ngFor="let brand of brands" routerLink="/brand/{{brand.slug}}" routerLinkActive="active-nav" class="nav">
                 <li>{{brand.name}}</li>
             </a>
         </ul>

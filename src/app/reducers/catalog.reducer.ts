@@ -9,7 +9,7 @@ export const DELETE_CATALOG = 'DELETE_CATALOG';
 
 const initialState: any = [];
 
-export const CatalogReducer: ActionReducer<any> = (state = initialState, action: Action) => {
+export function CatalogReducer(state = initialState, action: Action) {
  switch (action.type) {
     case 'ADD_CATALOGS':
       return action.payload;

@@ -1,8 +1,9 @@
 <carousel>
-  <slide *ngFor="let brand of brands">
-    <a routerLink="/brand/{{brand._id}}"><img [src]="brand.displayImg" class="slide-img" alt="{{brand.name}}">
-    <div class="carousel-caption">
-     <h3>{{brand.name}}</h3>
-   </div></a>
-   </slide>
+    <slide *ngFor="let brand of brands">
+        <a routerLink="/brand/{{brand.slug}}"><img [src]="brand.displayImg" class="slide-img" alt="{{brand.name}}">
+            <div class="carousel-caption">
+                <h3>{{brand.name}}</h3>
+            </div>
+        </a>
+    </slide>
 </carousel>

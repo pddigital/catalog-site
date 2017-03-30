@@ -32,17 +32,17 @@ export class BrandComponent implements OnInit {
         this.brands = brands;
         
         this.currentBrand = this.brands.filter((brand)=>{
-          return brand._id === params['id'];
+          return brand.slug === params['slug'];
         })
         this.currentBrand = this.currentBrand[0];
+ 
       })
 
 
       this.store.select('catalogs').subscribe(catalogs=>{
         this.catalogs = catalogs;
-        
         this.currentCatalogs = this.catalogs.filter((catalog)=>{
-          return catalog.brand === params['id'];
+          return catalog.brand === this.currentBrand._id;
         })
       })
     })

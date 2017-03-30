@@ -47,7 +47,7 @@ export class EditCatalogComponent implements OnInit {
     return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
   }
 
-  private myDatePickerOptions: IMyOptions = {
+  public myDatePickerOptions: IMyOptions = {
         // other options...
         dateFormat: 'mm.dd.yyyy',
         showTodayBtn: true
