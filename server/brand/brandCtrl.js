@@ -40,7 +40,7 @@ module.exports = {
                 return res.status(500).json(err);
             }
             filePayload = {
-                fileName: `http://localhost:3000/uploads/${req.fileName}`
+                fileName: `/uploads/${req.fileName}`
             }
 
             return res.status(200).json(filePayload);

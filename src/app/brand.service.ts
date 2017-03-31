@@ -11,10 +11,11 @@ export class BrandService {
 
   constructor(private http: Http) { }
 
-  private loginUrl = 'http://localhost:3000/api/login';
-  private dashUrl = 'http://localhost:3000/api/everything';
-  private brandUrl = 'http://localhost:3000/api/brand';
-  private catalogUrl = 'http://localhost:3000/api/catalog';
+  private loginUrl = '/api/login';
+  private dashUrl = '/api/everything';
+  private brandUrl = '/api/brand';
+  private catalogUrl = '/api/catalog';
+  private fileUrl = '/api/file';
 
 
   authenticate(body: Object): Observable<Login>{
@@ -117,7 +118,7 @@ export class BrandService {
         var xhr = new XMLHttpRequest();
            let formData = new FormData();
            formData.append("theFile", file.files[0]);
-        xhr.open('POST', 'http://localhost:3000/api/file', true);
+        xhr.open('POST', '/api/file', true);
         xhr.onload = function () {
           if (this.status >= 200 && this.status < 300) {
 
