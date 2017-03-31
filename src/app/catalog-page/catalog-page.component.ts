@@ -25,14 +25,15 @@ export class CatalogPageComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.store.select('catalogs').subscribe(catalogs=>{
-        this.catalogs = catalogs;
+
+
+      let catalogs = JSON.parse(localStorage.getItem("catalogs"));
         
-        this.currentCatalog = this.catalogs.filter((catalog)=>{
+        this.currentCatalog = catalogs.filter((catalog)=>{
           return catalog._id === this.route.snapshot.params['id'];
         })
         this.currentCatalog = this.currentCatalog[0];
-      })
+
   }
 
 }

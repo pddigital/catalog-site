@@ -51,8 +51,14 @@ export class AppComponent implements OnInit {
      this.brandService.getEverything() 
                         .subscribe(
                           everything => {
+
+        
+                          localStorage.setItem("brands", JSON.stringify(everything.brands));
+                          localStorage.setItem("catalogs", JSON.stringify(everything.catalogs));
+
                           this.store.dispatch({ type: ADD_BRANDS, payload: everything.brands });
                           this.store.dispatch({ type: ADD_CATALOGS, payload: everything.catalogs });
+    
                         },
                           error => {
                             this.errorMessage = <any>error;

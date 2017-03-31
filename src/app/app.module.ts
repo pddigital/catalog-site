@@ -27,6 +27,8 @@ import { CatalogReducer } from './reducers/catalog.reducer';
 import { CatalogsComponent } from './catalogs/catalogs.component';
 import { AuthGuardService } from './auth-guard.service';
 import {APP_BASE_HREF} from '@angular/common';
+import { ADD_BRANDS } from './reducers/brand.reducer';
+import { ADD_CATALOGS } from './reducers/catalog.reducer';
 
 
 const ROUTES = [

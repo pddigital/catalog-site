@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   login: FormGroup;
   loginState: Login;
   errorMessage: string;
+  brands: any;
 
   onSubmit({value, valid}: {value: Login, valid: boolean}){
       this.brandService.authenticate(value) 
