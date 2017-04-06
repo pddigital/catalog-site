@@ -44,6 +44,7 @@ export class EditCatalogComponent implements OnInit {
   startingDate: any;
   uploading: boolean;
   pdfUploading: boolean;
+  submitting: boolean;
   
   getFileExtension = (filename)=> {
     return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
@@ -80,6 +81,7 @@ export class EditCatalogComponent implements OnInit {
     if(value.brand && value.catalogName && this.thumbFileSrc && this.pdfFileSrc && this.pubDate){
       value.catalogThumb = this.thumbFileSrc;
       value.catalogPdf = this.pdfFileSrc;
+      this.submitting = true;
 
       if(this.pubDate.date){
         this.pubDate.date.month = this.pubDate.date.month - 1;
@@ -99,9 +101,11 @@ export class EditCatalogComponent implements OnInit {
                        .subscribe(
                         newCatalog => {
                          this.store.dispatch({ type: UPDATE_CATALOG, payload: updatedCatalog });
+                         this.submitting = false;
                          this.router.navigate([`/catalogs/${value.brand}`]);
                        },
                          error => {
+                          this.submitting = false;
                           this.errorMessage = <any>error
                        });
 
@@ -118,6 +122,8 @@ export class EditCatalogComponent implements OnInit {
     this.thumbFile = '';
     this.thumbFileSrc = '';
     this.uploading = true;
+    this.catalog.get('catalogThumb').disable()
+
 
     let ext = this.getFileExtension(event.srcElement.files[0].name);
 
@@ -131,6 +137,7 @@ export class EditCatalogComponent implements OnInit {
       this.thumbFileSrc = this.thumbFileSrc.fileName;
       this.thumbFile = event.srcElement.files[0].name;
       this.uploading = false;
+      this.catalog.get('catalogThumb').enable()
     })
     .catch((err)=> {
       this.imageError = true;
@@ -149,6 +156,7 @@ export class EditCatalogComponent implements OnInit {
     this.pdfFile = '';
     this.pdfFileSrc = '';
     this.pdfUploading = true;
+    this.catalog.get('catalogPdf').disable()
 
     let ext = this.getFileExtension(event.srcElement.files[0].name);
 
@@ -162,6 +170,7 @@ export class EditCatalogComponent implements OnInit {
       this.pdfFileSrc = this.pdfFileSrc.fileName;
       this.pdfFile = event.srcElement.files[0].name;
       this.pdfUploading = false;
+      this.catalog.get('catalogPdf').enable()
     })
     .catch((err)=> {
       this.pdfError = true;

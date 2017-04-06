@@ -34,6 +34,7 @@ export class EditBrandComponent implements OnInit {
   newBrand: Brand;
   errorMessage: string;
   brandId: string;
+  submitting: boolean;
 
   onSubmit({value, valid}: {value: Brand, valid: boolean}){
     if(!this.bannerFileSrc) {
@@ -42,7 +43,7 @@ export class EditBrandComponent implements OnInit {
     if(this.bannerFileSrc && value.name && value.link){
       this.uploadError = false;
       value.displayImg = this.bannerFileSrc;
-      
+      this.submitting = true;
       let updatedBrand;
       updatedBrand = value;
       updatedBrand._id = this.brandId;
@@ -51,10 +52,11 @@ export class EditBrandComponent implements OnInit {
                        .subscribe(
                         newBrand => {
                         this.store.dispatch({ type: UPDATE_BRAND, payload: updatedBrand });
-                        
+                        this.submitting = false;
                         this.router.navigate(['/admin']);
                        },
                          error => {
+                          this.submitting = false;
                           this.errorMessage = <any>error
                        });
       
@@ -70,11 +72,13 @@ export class EditBrandComponent implements OnInit {
     this.uploadError = false;
     this.bannerFileSrc = '';
     this.uploading = true;
+    this.brand.get('displayImg').disable();
 
     this.brandService.upload(event.srcElement).then((data)=> {      
       this.bannerFileSrc = data;
       this.bannerFileSrc = this.bannerFileSrc.fileName;
       this.uploading = false;
+      this.brand.get('displayImg').enable()
     })
     .catch((err)=> {
       this.uploadError = true;

@@ -39,6 +39,7 @@ export class AddCatalogComponent implements OnInit {
   errorMessage: string;
   uploading: boolean;
   pdfUploading: boolean;
+  submitting: boolean;
   
   getFileExtension = (filename)=> {
     return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
@@ -76,14 +77,17 @@ export class AddCatalogComponent implements OnInit {
       value.catalogThumb = this.thumbFileSrc;
       value.catalogPdf = this.pdfFileSrc;
       value.pubDate = this.pubDate;
+      this.submitting = true;
 
       this.brandService.addCatalog(value) 
                        .subscribe(
                         newCatalog => {
                          this.store.dispatch({ type: CREATE_CATALOG, payload: newCatalog });
+                         this.submitting = false;
                          this.router.navigate(['/admin']);
                        },
                          error => {
+                          this.submitting = false;
                           this.errorMessage = <any>error
                        });
 
@@ -100,6 +104,7 @@ export class AddCatalogComponent implements OnInit {
     this.thumbFile = '';
     this.thumbFileSrc = '';
     this.uploading = true;
+    this.catalog.get('catalogThumb').disable()
 
     let ext = this.getFileExtension(event.srcElement.files[0].name);
 
@@ -113,6 +118,7 @@ export class AddCatalogComponent implements OnInit {
       this.thumbFileSrc = this.thumbFileSrc.fileName;
       this.thumbFile = event.srcElement.files[0].name;
       this.uploading = false;
+      this.catalog.get('catalogThumb').enable()
     })
     .catch((err)=> {
       this.imageError = true;
@@ -131,6 +137,7 @@ export class AddCatalogComponent implements OnInit {
     this.pdfFile = '';
     this.pdfFileSrc = '';
     this.pdfUploading = true;
+    this.catalog.get('catalogPdf').disable()
 
     let ext = this.getFileExtension(event.srcElement.files[0].name);
 
@@ -144,6 +151,7 @@ export class AddCatalogComponent implements OnInit {
       this.pdfFileSrc = this.pdfFileSrc.fileName;
       this.pdfFile = event.srcElement.files[0].name;
       this.pdfUploading = false;
+      this.catalog.get('catalogPdf').enable()
     })
     .catch((err)=> {
       this.pdfError = true;

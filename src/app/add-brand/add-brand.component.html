@@ -20,9 +20,7 @@
 
             <!-- File Button -->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="displayImg">Upload Banner (.jpg or .png, 1900px by 800px):</label>
-                <label class=" custom-file-upload" for="displayImg">Select File</label>
-
+                <label class="col-md-4 control-label">Upload Banner (.jpg or .png, 1900px by 800px):</label>
                 <div class="col-md-4">
                     <img *ngIf="this.uploading" src="../../assets/spinner.gif" class="spinner">
                     <img class="uploadedImg" *ngIf="this.bannerFileSrc" [src]="this.bannerFileSrc">
@@ -49,7 +47,7 @@
                 <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{errorMessage}}</p>
             </div>
 
-            <button type="submit" class="btn btn-lg btn-primary center-block"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+            <button [disabled]="this.submitting" type="submit" class="btn btn-lg btn-primary center-block"><i class="fa fa-plus-circle" aria-hidden="true"></i>
  Add Brand</button>
         </fieldset>
     </form>

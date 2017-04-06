@@ -31,6 +31,7 @@ export class AddBrandComponent implements OnInit {
   newBrand: Brand;
   errorMessage: string;
   uploading: boolean;
+  submitting: boolean;
 
   onSubmit({value, valid}: {value: Brand, valid: boolean}){
     if(!this.bannerFileSrc) {
@@ -38,16 +39,18 @@ export class AddBrandComponent implements OnInit {
     }
     if(this.bannerFileSrc && value.name && value.link){
       this.uploadError = false;
+      this.submitting = true;
       value.displayImg = this.bannerFileSrc;
-
+      
       this.brandService.addBrand(value) 
                        .subscribe(
                         newBrand => {
                         this.store.dispatch({ type: CREATE_BRAND, payload: newBrand });
-                        
+                        this.submitting = false;
                         this.router.navigate(['/admin']);
                        },
                          error => {
+                          this.submitting = false;
                           this.errorMessage = <any>error
                        });
     }
@@ -64,12 +67,14 @@ export class AddBrandComponent implements OnInit {
     this.uploading = true;
     this.bannerFile = '';
     this.bannerFileSrc = '';
+    this.brand.get('displayImg').disable();
 
     this.brandService.upload(event.srcElement).then((data)=> {      
-      this.bannerFileSrc = data;
-      this.bannerFileSrc = this.bannerFileSrc.fileName;
-      this.bannerFile = event.srcElement.files[0].name;
-      this.uploading = false;
+             this.bannerFileSrc = data;
+             this.bannerFileSrc = this.bannerFileSrc.fileName;
+             this.bannerFile = event.srcElement.files[0].name;
+             this.uploading = false;
+             this.brand.get('displayImg').enable();
     })
     .catch((err)=> {
       console.log(err)
@@ -80,6 +85,7 @@ export class AddBrandComponent implements OnInit {
   }
 
   ngOnInit() {
+
 
         this.uploadError = false;
     
