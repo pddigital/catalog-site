@@ -8,6 +8,10 @@ body {
     font-size: 140%;
 }
 
+.spinner {
+    width: 80px;
+}
+
 .body-container {
     background-color: #F2F3F4;
 }

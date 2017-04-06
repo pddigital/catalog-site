@@ -30,6 +30,7 @@ export class AddBrandComponent implements OnInit {
   uploadError: boolean;
   newBrand: Brand;
   errorMessage: string;
+  uploading: boolean;
 
   onSubmit({value, valid}: {value: Brand, valid: boolean}){
     if(!this.bannerFileSrc) {
@@ -49,14 +50,18 @@ export class AddBrandComponent implements OnInit {
                          error => {
                           this.errorMessage = <any>error
                        });
-      
     }
    
   }
 
-
   onBannerChange(event) {
+
+    if(!event.srcElement.files[0]){
+      return;
+    }
+
     this.uploadError = false;
+    this.uploading = true;
     this.bannerFile = '';
     this.bannerFileSrc = '';
 
@@ -64,8 +69,10 @@ export class AddBrandComponent implements OnInit {
       this.bannerFileSrc = data;
       this.bannerFileSrc = this.bannerFileSrc.fileName;
       this.bannerFile = event.srcElement.files[0].name;
+      this.uploading = false;
     })
     .catch((err)=> {
+      console.log(err)
       this.uploadError = true;
       alert('Please upload an image file, less than 10MB!');
     });

@@ -42,6 +42,8 @@ export class EditCatalogComponent implements OnInit {
   errorMessage: string;
   catalogId: string;
   startingDate: any;
+  uploading: boolean;
+  pdfUploading: boolean;
   
   getFileExtension = (filename)=> {
     return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
@@ -108,9 +110,14 @@ export class EditCatalogComponent implements OnInit {
 
   onThumbChange(event) {
 
+    if(!event.srcElement.files[0]){
+      return;
+    }
+
     this.imageError = false;
     this.thumbFile = '';
     this.thumbFileSrc = '';
+    this.uploading = true;
 
     let ext = this.getFileExtension(event.srcElement.files[0].name);
 
@@ -123,6 +130,7 @@ export class EditCatalogComponent implements OnInit {
       this.thumbFileSrc = data;
       this.thumbFileSrc = this.thumbFileSrc.fileName;
       this.thumbFile = event.srcElement.files[0].name;
+      this.uploading = false;
     })
     .catch((err)=> {
       this.imageError = true;
@@ -133,9 +141,14 @@ export class EditCatalogComponent implements OnInit {
 
   onPdfChange(event) {
 
+    if(!event.srcElement.files[0]){
+      return;
+    }
+
     this.pdfError = false;
     this.pdfFile = '';
     this.pdfFileSrc = '';
+    this.pdfUploading = true;
 
     let ext = this.getFileExtension(event.srcElement.files[0].name);
 
@@ -148,6 +161,7 @@ export class EditCatalogComponent implements OnInit {
       this.pdfFileSrc = data;
       this.pdfFileSrc = this.pdfFileSrc.fileName;
       this.pdfFile = event.srcElement.files[0].name;
+      this.pdfUploading = false;
     })
     .catch((err)=> {
       this.pdfError = true;

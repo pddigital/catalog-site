@@ -23,6 +23,7 @@
                 <label class="custom-file-upload" for="displayImg">Select File</label>
 
                 <div class="col-md-4">
+                    <img *ngIf="this.uploading" src="../../assets/spinner.gif" class="spinner">
                     <img class="uploadedImg" *ngIf="this.bannerFileSrc" [src]="this.bannerFileSrc">
                     <div class="alert alert-danger" *ngIf="this.uploadError">
                         <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> A valid image file is required!</p>

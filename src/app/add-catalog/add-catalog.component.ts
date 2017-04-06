@@ -37,6 +37,8 @@ export class AddCatalogComponent implements OnInit {
   nameError: boolean;
   newCatalog: any;
   errorMessage: string;
+  uploading: boolean;
+  pdfUploading: boolean;
   
   getFileExtension = (filename)=> {
     return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
@@ -90,9 +92,14 @@ export class AddCatalogComponent implements OnInit {
 
   onThumbChange(event) {
 
+    if(!event.srcElement.files[0]){
+      return;
+    }
+
     this.imageError = false;
     this.thumbFile = '';
     this.thumbFileSrc = '';
+    this.uploading = true;
 
     let ext = this.getFileExtension(event.srcElement.files[0].name);
 
@@ -105,6 +112,7 @@ export class AddCatalogComponent implements OnInit {
       this.thumbFileSrc = data;
       this.thumbFileSrc = this.thumbFileSrc.fileName;
       this.thumbFile = event.srcElement.files[0].name;
+      this.uploading = false;
     })
     .catch((err)=> {
       this.imageError = true;
@@ -115,9 +123,14 @@ export class AddCatalogComponent implements OnInit {
 
   onPdfChange(event) {
 
+    if(!event.srcElement.files[0]){
+      return;
+    }
+
     this.pdfError = false;
     this.pdfFile = '';
     this.pdfFileSrc = '';
+    this.pdfUploading = true;
 
     let ext = this.getFileExtension(event.srcElement.files[0].name);
 
@@ -130,6 +143,7 @@ export class AddCatalogComponent implements OnInit {
       this.pdfFileSrc = data;
       this.pdfFileSrc = this.pdfFileSrc.fileName;
       this.pdfFile = event.srcElement.files[0].name;
+      this.pdfUploading = false;
     })
     .catch((err)=> {
       this.pdfError = true;

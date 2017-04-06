@@ -18,6 +18,7 @@ export class EditBrandComponent implements OnInit {
   catalogs: any;
   theseCatalogs: any;
   auth: any;
+  uploading: boolean;
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private brandService: BrandService, public store: Store<AppState>) {
     
@@ -63,12 +64,17 @@ export class EditBrandComponent implements OnInit {
 
 
   onBannerChange(event) {
+    if(!event.srcElement.files[0]){
+      return;
+    }
     this.uploadError = false;
     this.bannerFileSrc = '';
+    this.uploading = true;
 
     this.brandService.upload(event.srcElement).then((data)=> {      
       this.bannerFileSrc = data;
       this.bannerFileSrc = this.bannerFileSrc.fileName;
+      this.uploading = false;
     })
     .catch((err)=> {
       this.uploadError = true;
