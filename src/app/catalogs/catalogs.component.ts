@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../modals/app-state';
 import { Router, ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-catalogs',
   templateUrl: './catalogs.component.html',
@@ -44,7 +45,15 @@ export class CatalogsComponent implements OnInit {
           return catalog.brand === this.route.snapshot.params['id'];
         })
         
-        this.theseCatalogs = theseCatalogs;
+        this.theseCatalogs = theseCatalogs.sort((a, b)=>{
+           a = new Date(a.pubDate);
+           b = new Date(b.pubDate);
+           return a>b ? -1 : a<b ? 1 : 0;
+        });
+
+        if(this.theseCatalogs){
+          console.log(this.theseCatalogs);
+        }
       
       })
     }

@@ -1,10 +1,10 @@
 <div class="title-bar">
-    <h1 class="page-title">{{currentCatalog.catalogName}}</h1>
+    <h1 class="page-title">{{catalogName}}</h1>
 </div>
 
 <div class="page-container">
     <div class="admin-buttons">
-        <a href="{{currentCatalog.catalogPdf}}" target="_blank"><button class="btn btn-lg btn-success"><i class="fa fa-download" aria-hidden="true"></i> Download PDF</button></a>
+        <a href="{{catalogPdf}}" target="_blank"><button class="btn btn-lg btn-success"><i class="fa fa-download" aria-hidden="true"></i> Download PDF</button></a>
     </div>
     <div [innerHTML]="innerHtml()"></div>
 </div>

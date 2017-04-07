@@ -19,6 +19,8 @@ export class BrandComponent implements OnInit {
   currentCatalogs: any;
   currentBrand: any;
   brandId: any;
+  slug: string;
+  brandName: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private brandService: BrandService, public store: Store<AppState>) { 
   
@@ -27,26 +29,45 @@ export class BrandComponent implements OnInit {
  ngOnInit() {
 
 
-        
-      this.brandId = this.route.params.subscribe(params => {
 
-        let brands = JSON.parse(localStorage.getItem("brands"));
-        let catalogs = JSON.parse(localStorage.getItem("catalogs"));
-      
-        this.currentBrand = brands.filter((brand)=>{
-        return brand.slug === params['slug'];
+      this.store.select('brands').subscribe(brands=>{
+                this.brands = brands;
 
+            this.store.select('catalogs').subscribe(catalogs=>{
+                this.catalogs = catalogs;
+
+                
+              this.brandId = this.route.params.subscribe(params =>{
+                    this.slug = params['slug'];
+
+                    this.currentBrand = this.brands.filter(brand =>{
+                       return brand.slug === this.slug;
+                    })
+
+                    if(this.currentBrand[0]){
+                      this.brandName = this.currentBrand[0].name;
+                    }
+
+                    this.currentCatalogs = this.catalogs.filter(catalog =>{
+
+                      return catalog.brand === this.currentBrand[0]._id;
+
+                    })
+
+                    this.currentCatalogs = this.currentCatalogs.sort((a, b)=>{
+                          a = new Date(a.pubDate);
+                          b = new Date(b.pubDate);
+                          return a>b ? -1 : a<b ? 1 : 0;
+                    });
+                      
+
+              })
+
+          
+            })
+             
       })
-        this.currentBrand = this.currentBrand[0];
-
-          this.currentCatalogs = catalogs.filter((catalog)=>{
-          return catalog.brand === this.currentBrand._id;
-        })
-  
- 
-      })
-
-
+    
 
 
    }

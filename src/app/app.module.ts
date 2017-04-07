@@ -50,32 +50,32 @@ const ROUTES = [
   },
   {
     path: 'admin',
-
+    canActivate:[AuthGuardService],
     component: AdminComponent
   },
       {
     path: 'catalogs/:id',
-
+    canActivate:[AuthGuardService],
     component: CatalogsComponent
   },
   {
     path: 'add-catalog',
-
+    canActivate:[AuthGuardService],
     component: AddCatalogComponent
   },
   {
     path: 'add-brand',
-
+    canActivate:[AuthGuardService],
     component: AddBrandComponent
   },
   {
     path: 'edit-brand/:id',
-
+    canActivate:[AuthGuardService],
     component: EditBrandComponent
   },
   {
     path: 'edit-catalog/:id',
-
+    canActivate:[AuthGuardService],
     component: EditCatalogComponent
   },
   {
