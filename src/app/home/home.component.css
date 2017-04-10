@@ -13,3 +13,31 @@
   text-transform: uppercase;
 
 }
+
+.home-mobile-nav {
+  display: none;
+}
+
+
+@media (max-width: 800px) {
+
+    #homepage-slider {
+      display: none;
+    }
+
+    .home-mobile-nav {
+      background-color: #222255;
+      display: block;
+      text-align: center;
+    }
+    .home-mobile-nav ul {
+      padding: 0;
+      margin-bottom: 5%;
+    }
+    .home-mobile-nav ul li {
+      color: white;
+      padding: 3%;
+      font-size: 2em;
+      margin: 0;
+    }
+}

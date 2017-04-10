@@ -26,7 +26,11 @@ export class BrandComponent implements OnInit {
   
   }
 
- ngOnInit() {
+  goCatalog(catalogId){
+      this.router.navigate([`/catalog/${catalogId}`]);
+  }
+  
+  ngOnInit() {
 
 
 

@@ -8,13 +8,8 @@
     <div class="catalog-container">
 
 
-        <div *ngFor="let catalog of currentCatalogs" class="featured-catalog">
-            <a routerLink="/catalog/{{catalog._id}}">
-                <div class="inner-container" [ngStyle]="{'background-image':'url(' + catalog.catalogThumb + ')'}">
-                    <span></span>
-                </div>
-            </a>
-
+        <div *ngFor="let catalog of currentCatalogs" [ngStyle]="{'background-image':'url(' + catalog.catalogThumb + ')'}" class="featured-catalog" (click)="goCatalog(catalog._id)">
+    
         </div>
     </div>
 

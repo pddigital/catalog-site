@@ -1,4 +1,11 @@
-<carousel>
+ <nav class="home-mobile-nav">
+        <ul>
+            <a *ngFor="let brand of brands" routerLink="/brand/{{brand.slug}}" routerLinkActive="active-nav" class="nav">
+                <li>{{brand.name}}</li>
+            </a>
+        </ul>
+    </nav>
+<carousel id="homepage-slider">
     <slide *ngFor="let brand of brands">
         <a routerLink="/brand/{{brand.slug}}"><img [src]="brand.displayImg" class="slide-img" alt="{{brand.name}}">
             <div class="carousel-caption">
