@@ -68,6 +68,10 @@ nav li {
     font-size: 1.8em;
 }
 
+.mobile-nav li {
+    font-size: 2.6em;
+}
+
 nav a:link {
     color: white;
 }

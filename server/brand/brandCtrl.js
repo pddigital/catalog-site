@@ -80,7 +80,9 @@ module.exports = {
             if (err) {
                 return res.status(500).json(err);
             }
-            return res.status(201).json(brand);
+            let copy = Object.assign({}, brand._doc);
+            copy.slug = brand.name.toLowerCase().replace(/&/g, "and").replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').split(' ').join('-');
+            return res.status(201).json(copy);
         });
     },
     deleteBrand(req, res, next) {
@@ -97,7 +99,9 @@ module.exports = {
             if (err) {
                 return res.status(500).json(err)
             }
-            return res.status(200).json(brand)
+            let copy = Object.assign({}, req.body);
+            copy.slug = req.body.name.toLowerCase().replace(/&/g, "and").replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').split(' ').join('-');
+            return res.status(200).json(copy)
         });
     },
 }

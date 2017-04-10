@@ -1,43 +1,45 @@
 .slide-img {
-  width: 100%;
+    width: 100%;
 }
 
-
 .carousel-caption {
-  top: 30%;
+    top: 30%;
 }
 
 .carousel-caption h3 {
-  font-size: 4em;
-  font-weight: 900;
-  text-transform: uppercase;
-
+    font-size: 4em;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
 .home-mobile-nav {
-  display: none;
+    display: none;
 }
 
-
 @media (max-width: 800px) {
-
     #homepage-slider {
-      display: none;
+        display: none;
     }
-
     .home-mobile-nav {
-      background-color: #222255;
-      display: block;
-      text-align: center;
+        background-color: #222255;
+        display: block;
+        text-align: center;
+        padding-top: 2%;
     }
     .home-mobile-nav ul {
-      padding: 0;
-      margin-bottom: 5%;
+        padding: 0;
+        margin-bottom: 5%;
     }
     .home-mobile-nav ul li {
-      color: white;
-      padding: 3%;
-      font-size: 2em;
-      margin: 0;
+        color: white;
+        padding: 3%;
+        font-size: 2.4em;
+        margin: 0;
+    }
+    .carousel-caption {
+        top: 10px;
+    }
+    .carousel-caption h3 {
+        font-size: 3em;
     }
 }
