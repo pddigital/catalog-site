@@ -29,10 +29,18 @@ export class AppComponent implements OnInit {
 
     this.hideMenu = true;
 
+
+    window.addEventListener("resize", function(){
+      
+      document.getElementById('hamburger').style.display = "none";
+        
+    }, true);
+
   }
 
   toggleHamburger(){
     this.hideMenu = !this.hideMenu;
+    
   }
 
   signOut(){

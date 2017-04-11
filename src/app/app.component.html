@@ -15,7 +15,7 @@
     </header>
 
 
-    <nav class="mobile-nav" [style.display]="hideMenu ? 'none' : 'inherit'">
+    <nav class="mobile-nav" id="hamburger" [style.display]="hideMenu ? 'none' : 'inherit'">
         <ul>
             <a *ngFor="let brand of brands" routerLink="/brand/{{brand.slug}}" routerLinkActive="active-nav" class="nav">
                 <li>{{brand.name}}</li>
